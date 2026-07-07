@@ -1,0 +1,135 @@
+import type { Translations } from './types';
+
+export const en: Translations = {
+  lang: 'en',
+  landing: {
+    eyebrow: 'Reframe Concepts · Mission Reimagined',
+    titleBefore: 'Would your community ',
+    titleItalic: 'grieve',
+    titleAfter: ' you?',
+    body1: 'A five-minute diagnostic for nonprofit and faith-based leaders. Not a quiz. A quiet, honest read on how load-bearing your institution really is.',
+    body2: 'There is nothing to sign up for to begin. Your results are sent to you by email at the end.',
+    cta: 'Begin the audit',
+    tagline: 'Grievable · Hidden why · Built to be missed',
+  },
+  scoring: {
+    back: 'Back',
+    next: 'Next',
+    seeResult: 'See my result',
+    coreDimension: 'Core dimension · weighted double',
+    disagree: 'Disagree',
+    agree: 'Agree',
+  },
+  calculating: {
+    headline: 'Reading your answers',
+    body: 'Weighing what would be missed',
+  },
+  gate: {
+    eyebrow: 'Audit complete',
+    titleBefore: 'Your results are ',
+    titleItalic: 'ready',
+    titleAfter: '.',
+    body: 'Tell us who you are and we will show you your full Grievability Score and interpretation — right here, right now.',
+    namePlaceholder: 'Your name',
+    orgPlaceholder: 'Organization name',
+    emailPlaceholder: 'your@email.org',
+    cta: 'Show me my results',
+    ctaLoading: 'Reading your results…',
+    error: 'Something went wrong. Please try again.',
+    footer: 'No spam · results emailed as a keepsake · unsubscribe anytime',
+    privacyNote: 'Your name, email, and results are stored by Reframe Concepts to deliver this report and follow up with you.',
+    privacyLink: 'Privacy policy',
+    cityPlaceholder: 'City (optional)',
+    provincePlaceholder: 'Province / State (optional)',
+  },
+  results: {
+    reportLabel: '· Grievability Report',
+    headline: ', here is what the audit found.',
+    scoreLabel: 'Grievability Score',
+    interpretation: 'Interpretation',
+    fullBreakdown: 'Full breakdown',
+    weightedDouble: 'weighted ×2',
+    twoThings: 'The two things to fix first',
+    deeper: 'Ready to go deeper?',
+    ctaBody: 'This audit runs deeper in the room. Bring the full {org} board, work through the hard answers together, and leave with a real plan.',
+    ctaButton: 'Book the live board audit',
+    emailNote: 'A copy of these results is on its way to your inbox.',
+  },
+  dims: [
+    {
+      name: 'Attunement',
+      tie: 'Listening Program',
+      desc: 'How closely you are still listening to the people you serve.',
+      statements: [
+        'We are in living dialogue with the people we serve, not only our members and donors.',
+        'We can name the needs our community feels right now, in their own words.',
+        'Our leadership regularly hears from voices outside the institution.',
+      ],
+    },
+    {
+      name: 'Relevance',
+      tie: 'Needs Assessment',
+      desc: 'Whether the need you exist to meet is present tense, not historical.',
+      statements: [
+        'The need we exist to meet is present and current, not historical or nostalgic.',
+        "Our core work has adapted as the community's needs have shifted.",
+        'If we vanished, a real and present gap would open, not just a sentimental one.',
+      ],
+    },
+    {
+      name: 'Indispensability',
+      tie: 'Functional Sweet Spot',
+      desc: 'How tightly what you offer overlaps what your community actually needs.',
+      statements: [
+        'What we offer and what our community needs overlap tightly and deliberately.',
+        "We are load-bearing in our community's web of support, not a nice-to-have.",
+        'No one else could easily replace the specific thing we do.',
+      ],
+    },
+    {
+      name: 'Story',
+      tie: 'Social Impact Vision',
+      desc: 'Whether the future you are building is declared, specific, and repeatable.',
+      statements: [
+        'We have clearly declared the future we are working to build.',
+        'That vision is specific enough that people would feel robbed if it never arrived.',
+        'People outside our walls can repeat our story back to us.',
+      ],
+    },
+    {
+      name: 'Durability',
+      tie: 'Operational Delivery',
+      desc: 'Whether you can deliver, and keep delivering, over time.',
+      statements: [
+        'We are financially resilient, not living grant to grant or appeal to appeal.',
+        'Our governance is healthy: clear roles, real succession, not dependent on one person.',
+        'We deliver consistently and dependably over time.',
+      ],
+    },
+  ],
+  recs: [
+    'Build a standing listening rhythm. Put leadership in the same room as the people you serve on a schedule, not by accident, and write down what you hear.',
+    'Re-audit the need out loud. Ask whether the gap you fill is present tense, and let an honest answer reshape the work rather than defend it.',
+    'Tighten the overlap. Name the one thing only you can do, and pour attention and resources there until your absence would genuinely fracture something.',
+    'Declare the future plainly. Make the vision specific enough that its absence would feel like a theft, then teach it until others can repeat it.',
+    'Reduce single points of failure. Diversify funding and clarify succession so the mission can outlive any one person, budget, or season.',
+  ],
+  bands: {
+    loadBearing: {
+      name: 'Load bearing',
+      desc: 'Your absence would leave a visible hole. People would reorganize their lives around the gap you left.',
+    },
+    heldInAffection: {
+      name: 'Held in affection',
+      desc: 'You are loved, but replaceable. The warmth is real; the sweet spot needs tightening.',
+    },
+    quietlyAtRisk: {
+      name: 'Quietly at risk',
+      desc: 'A few would grieve, most would adjust. This is closeable, and now is the time to close it.',
+    },
+    disappearing: {
+      name: 'Disappearing in plain sight',
+      desc: 'Almost no one would notice yet. That is not a verdict, it is where the work begins.',
+    },
+  },
+};

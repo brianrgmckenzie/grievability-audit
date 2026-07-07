@@ -1,0 +1,135 @@
+import type { Translations } from './types';
+
+export const de: Translations = {
+  lang: 'de',
+  landing: {
+    eyebrow: 'Reframe Concepts · Mission Neu Gedacht',
+    titleBefore: 'Würde Ihre Gemeinschaft Sie ',
+    titleItalic: 'betrauern',
+    titleAfter: '?',
+    body1: 'Ein Fünf-Minuten-Diagnostic für Führungskräfte in gemeinnützigen und glaubensbasierten Organisationen. Kein Quiz. Eine ruhige, ehrliche Einschätzung, wie tragend Ihre Institution wirklich ist.',
+    body2: 'Es gibt nichts anzumelden, um zu beginnen. Ihre Ergebnisse werden Ihnen am Ende per E-Mail zugesandt.',
+    cta: 'Audit starten',
+    tagline: 'Unverzichtbar · Der verborgene Grund · Gebaut, um zu fehlen',
+  },
+  scoring: {
+    back: 'Zurück',
+    next: 'Weiter',
+    seeResult: 'Mein Ergebnis sehen',
+    coreDimension: 'Kerndimension · doppelt gewichtet',
+    disagree: 'Stimme nicht zu',
+    agree: 'Stimme zu',
+  },
+  calculating: {
+    headline: 'Ihre Antworten werden gelesen',
+    body: 'Was vermisst werden würde, wird gewogen',
+  },
+  gate: {
+    eyebrow: 'Audit abgeschlossen',
+    titleBefore: 'Ihre Ergebnisse sind ',
+    titleItalic: 'bereit',
+    titleAfter: '.',
+    body: 'Sagen Sie uns, wer Sie sind, und wir zeigen Ihnen Ihren vollständigen Score und die Interpretation — direkt hier, direkt jetzt.',
+    namePlaceholder: 'Ihr Name',
+    orgPlaceholder: 'Name der Organisation',
+    emailPlaceholder: 'ihre@email.de',
+    cta: 'Meine Ergebnisse anzeigen',
+    ctaLoading: 'Ergebnisse werden geladen…',
+    error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+    footer: 'Kein Spam · Ergebnisse per E-Mail · jederzeit abmelden',
+    privacyNote: 'Ihr Name, Ihre E-Mail-Adresse und Ihre Ergebnisse werden von Reframe Concepts gespeichert, um diesen Bericht zu übermitteln und mit Ihnen in Kontakt zu bleiben.',
+    privacyLink: 'Datenschutzerklärung',
+    cityPlaceholder: 'Stadt (optional)',
+    provincePlaceholder: 'Provinz / Bundesland (optional)',
+  },
+  results: {
+    reportLabel: '· Grievability-Bericht',
+    headline: ', das ist, was der Audit ergeben hat.',
+    scoreLabel: 'Grievability-Score',
+    interpretation: 'Interpretation',
+    fullBreakdown: 'Vollständige Auswertung',
+    weightedDouble: 'doppelt gewichtet',
+    twoThings: 'Die zwei Dinge, die zuerst zu beheben sind',
+    deeper: 'Bereit, tiefer zu gehen?',
+    ctaBody: 'Dieser Audit geht im Raum tiefer. Bringen Sie den gesamten Vorstand von {org}, arbeiten Sie gemeinsam die schwierigen Fragen durch und gehen Sie mit einem echten Plan.',
+    ctaButton: 'Live-Vorstandsaudit buchen',
+    emailNote: 'Eine Kopie dieser Ergebnisse ist auf dem Weg in Ihren Posteingang.',
+  },
+  dims: [
+    {
+      name: 'Resonanz',
+      tie: 'Zuhörprogramm',
+      desc: 'Wie aufmerksam Sie noch auf die Menschen hören, denen Sie dienen.',
+      statements: [
+        'Wir sind im lebendigen Dialog mit den Menschen, denen wir dienen — nicht nur mit unseren Mitgliedern und Spendern.',
+        'Wir können die Bedürfnisse unserer Gemeinschaft im Moment benennen, in ihren eigenen Worten.',
+        'Unsere Führung hört regelmäßig Stimmen außerhalb der Institution.',
+      ],
+    },
+    {
+      name: 'Relevanz',
+      tie: 'Bedarfsanalyse',
+      desc: 'Ob der Bedarf, für den Sie existieren, gegenwärtig ist — nicht historisch.',
+      statements: [
+        'Der Bedarf, für den wir existieren, ist gegenwärtig und aktuell, nicht historisch oder nostalgisch.',
+        'Unsere Kernarbeit hat sich angepasst, als sich die Bedürfnisse der Gemeinschaft verändert haben.',
+        'Wenn wir verschwänden, entstünde eine echte und gegenwärtige Lücke — keine sentimentale.',
+      ],
+    },
+    {
+      name: 'Unverzichtbarkeit',
+      tie: 'Funktionale Kernstärke',
+      desc: 'Wie eng das, was Sie anbieten, mit dem übereinstimmt, was Ihre Gemeinschaft wirklich braucht.',
+      statements: [
+        'Was wir anbieten und was unsere Gemeinschaft braucht, überschneidet sich eng und bewusst.',
+        'Wir sind tragend im Unterstützungsnetz unserer Gemeinschaft — kein nettes Extra.',
+        'Niemand sonst könnte leicht ersetzen, was wir spezifisch tun.',
+      ],
+    },
+    {
+      name: 'Erzählung',
+      tie: 'Soziale Wirkungsvision',
+      desc: 'Ob die Zukunft, die Sie aufbauen, erklärt, spezifisch und wiederholbar ist.',
+      statements: [
+        'Wir haben klar erklärt, welche Zukunft wir aufzubauen versuchen.',
+        'Diese Vision ist spezifisch genug, dass sich Menschen bestohlen fühlen würden, wenn sie nie Wirklichkeit würde.',
+        'Menschen außerhalb unserer Mauern können unsere Geschichte wiedergeben.',
+      ],
+    },
+    {
+      name: 'Beständigkeit',
+      tie: 'Operative Leistung',
+      desc: 'Ob Sie liefern können — und weiter liefern können — im Laufe der Zeit.',
+      statements: [
+        'Wir sind finanziell resilient — nicht von Förderung zu Förderung lebend.',
+        'Unsere Governance ist gesund: klare Rollen, echte Nachfolge, nicht abhängig von einer Person.',
+        'Wir liefern konsistent und verlässlich über die Zeit.',
+      ],
+    },
+  ],
+  recs: [
+    'Etablieren Sie einen regelmäßigen Zuhörrhythmus. Bringen Sie die Führung nach Terminplan in denselben Raum wie die Menschen, denen Sie dienen — nicht zufällig — und schreiben Sie auf, was Sie hören.',
+    'Überprüfen Sie den Bedarf laut. Fragen Sie, ob die Lücke, die Sie füllen, in der Gegenwart liegt, und lassen Sie eine ehrliche Antwort die Arbeit neu gestalten statt sie zu verteidigen.',
+    'Schärfen Sie die Überschneidung. Benennen Sie die eine Sache, die nur Sie können, und investieren Sie Aufmerksamkeit und Ressourcen dort, bis Ihre Abwesenheit wirklich etwas zerreißen würde.',
+    'Erklären Sie die Zukunft klar. Machen Sie die Vision so spezifisch, dass ihr Ausbleiben wie ein Diebstahl wirkt, und lehren Sie sie, bis andere sie wiedergeben können.',
+    'Reduzieren Sie einzelne Fehlerpunkte. Diversifizieren Sie die Finanzierung und klären Sie die Nachfolge, damit die Mission jede Person, jeden Haushalt und jede Saison überdauern kann.',
+  ],
+  bands: {
+    loadBearing: {
+      name: 'Tragendes Element',
+      desc: 'Ihre Abwesenheit würde ein sichtbares Loch hinterlassen. Menschen würden ihr Leben um die Lücke neu organisieren, die Sie hinterlassen.',
+    },
+    heldInAffection: {
+      name: 'Geliebt, aber ersetzbar',
+      desc: 'Sie werden geliebt, aber sind ersetzbar. Die Wärme ist echt; die Kernstärke muss geschärft werden.',
+    },
+    quietlyAtRisk: {
+      name: 'Still gefährdet',
+      desc: 'Einige würden trauern, die meisten würden sich anpassen. Das ist behebbar, und jetzt ist die Zeit, es zu tun.',
+    },
+    disappearing: {
+      name: 'Im Verschwinden begriffen',
+      desc: 'Fast niemand würde es noch bemerken. Das ist kein Urteil — das ist der Ausgangspunkt der Arbeit.',
+    },
+  },
+};

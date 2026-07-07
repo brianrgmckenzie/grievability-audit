@@ -1,0 +1,135 @@
+import type { Translations } from './types';
+
+export const fr: Translations = {
+  lang: 'fr',
+  landing: {
+    eyebrow: "Reframe Concepts · Mission Repensée",
+    titleBefore: "Votre communauté vous ",
+    titleItalic: "pleurerait",
+    titleAfter: "-elle ?",
+    body1: "Un diagnostic de cinq minutes pour les dirigeants d'organismes sans but lucratif et d'organisations de foi. Pas un quiz. Une lecture honnête sur le caractère vraiment irremplaçable de votre institution.",
+    body2: "Aucune inscription requise pour commencer. Vos résultats vous sont envoyés par courriel à la fin.",
+    cta: "Commencer l'audit",
+    tagline: "Irremplaçable · La raison cachée · Construit pour manquer",
+  },
+  scoring: {
+    back: "Retour",
+    next: "Suivant",
+    seeResult: "Voir mes résultats",
+    coreDimension: "Dimension centrale · pondérée double",
+    disagree: "Pas d'accord",
+    agree: "D'accord",
+  },
+  calculating: {
+    headline: "Lecture de vos réponses",
+    body: "Évaluation de ce qui manquerait",
+  },
+  gate: {
+    eyebrow: "Audit terminé",
+    titleBefore: "Vos résultats sont ",
+    titleItalic: "prêts",
+    titleAfter: ".",
+    body: "Dites-nous qui vous êtes et nous vous montrerons votre score complet et son interprétation — ici, maintenant.",
+    namePlaceholder: "Votre nom",
+    orgPlaceholder: "Nom de l'organisation",
+    emailPlaceholder: "votre@courriel.org",
+    cta: "Afficher mes résultats",
+    ctaLoading: "Lecture de vos résultats…",
+    error: "Une erreur s'est produite. Veuillez réessayer.",
+    footer: "Aucun pourriel · résultats envoyés en souvenir · se désabonner en tout temps",
+    privacyNote: "Votre nom, courriel et résultats sont conservés par Reframe Concepts pour vous remettre ce rapport et assurer un suivi.",
+    privacyLink: "Politique de confidentialité",
+    cityPlaceholder: "Ville (facultatif)",
+    provincePlaceholder: "Province / État (facultatif)",
+  },
+  results: {
+    reportLabel: "· Rapport de résilience",
+    headline: ", voici ce que l'audit a révélé.",
+    scoreLabel: "Score de résilience",
+    interpretation: "Interprétation",
+    fullBreakdown: "Analyse complète",
+    weightedDouble: "pondéré ×2",
+    twoThings: "Les deux priorités à traiter en premier",
+    deeper: "Prêt à aller plus loin ?",
+    ctaBody: "Cet audit va plus loin en salle. Réunissez tout le conseil de {org}, travaillez les questions difficiles ensemble, et repartez avec un vrai plan.",
+    ctaButton: "Réserver l'audit de conseil en direct",
+    emailNote: "Une copie de ces résultats est en route vers votre boîte de réception.",
+  },
+  dims: [
+    {
+      name: "Écoute",
+      tie: "Programme d'écoute",
+      desc: "Dans quelle mesure vous êtes encore à l'écoute des personnes que vous servez.",
+      statements: [
+        "Nous sommes en dialogue vivant avec les personnes que nous servons, pas seulement avec nos membres et donateurs.",
+        "Nous pouvons nommer les besoins que ressent notre communauté en ce moment, dans leurs propres mots.",
+        "Notre direction entend régulièrement des voix extérieures à l'institution.",
+      ],
+    },
+    {
+      name: "Pertinence",
+      tie: "Analyse des besoins",
+      desc: "Si le besoin pour lequel vous existez est présent, et non historique.",
+      statements: [
+        "Le besoin pour lequel nous existons est présent et actuel, non historique ou nostalgique.",
+        "Notre travail central s'est adapté à mesure que les besoins de la communauté ont évolué.",
+        "Si nous disparaissions, un écart réel et présent s'ouvrirait — pas seulement sentimental.",
+      ],
+    },
+    {
+      name: "Indispensabilité",
+      tie: "Zone de force fonctionnelle",
+      desc: "Dans quelle mesure ce que vous offrez recoupe ce dont votre communauté a réellement besoin.",
+      statements: [
+        "Ce que nous offrons et ce dont notre communauté a besoin se recoupent étroitement et délibérément.",
+        "Nous sommes porteurs dans le réseau de soutien de notre communauté, pas un simple plus.",
+        "Personne d'autre ne pourrait facilement remplacer la chose précise que nous faisons.",
+      ],
+    },
+    {
+      name: "Récit",
+      tie: "Vision d'impact social",
+      desc: "Si l'avenir que vous construisez est déclaré, spécifique et répétable.",
+      statements: [
+        "Nous avons clairement déclaré l'avenir que nous travaillons à construire.",
+        "Cette vision est assez précise pour que les gens se sentent lésés si elle n'arrivait jamais.",
+        "Les personnes extérieures à notre organisation peuvent nous raconter notre propre histoire.",
+      ],
+    },
+    {
+      name: "Pérennité",
+      tie: "Livraison opérationnelle",
+      desc: "Si vous pouvez livrer, et continuer à livrer, dans le temps.",
+      statements: [
+        "Nous sommes financièrement résilients — pas en train de vivre de subvention en subvention.",
+        "Notre gouvernance est saine : rôles clairs, vraie succession, pas dépendante d'une seule personne.",
+        "Nous livrons de manière cohérente et fiable dans le temps.",
+      ],
+    },
+  ],
+  recs: [
+    "Établissez un rythme d'écoute régulier. Mettez la direction dans la même pièce que les personnes que vous servez selon un calendrier, pas par hasard, et consignez ce que vous entendez.",
+    "Réauditez le besoin à voix haute. Demandez si l'écart que vous comblez est au présent, et laissez une réponse honnête remodeler le travail plutôt que le défendre.",
+    "Resserrez le chevauchement. Nommez la seule chose que vous seuls pouvez faire, et consacrez-y attention et ressources jusqu'à ce que votre absence fracture vraiment quelque chose.",
+    "Déclarez l'avenir clairement. Rendez la vision assez précise pour que son absence ressemble à un vol, puis enseignez-la jusqu'à ce que les autres puissent la répéter.",
+    "Réduisez les points de défaillance uniques. Diversifiez le financement et clarifiez la succession pour que la mission puisse survivre à toute personne, budget ou saison.",
+  ],
+  bands: {
+    loadBearing: {
+      name: "Pilier fondamental",
+      desc: "Votre absence laisserait un trou visible. Les gens réorganiseraient leur vie autour du vide que vous laisseriez.",
+    },
+    heldInAffection: {
+      name: "Aimé mais remplaçable",
+      desc: "Vous êtes aimé, mais remplaçable. La chaleur est réelle ; votre zone de force doit être resserrée.",
+    },
+    quietlyAtRisk: {
+      name: "Discrètement à risque",
+      desc: "Quelques-uns vous pleureraient, la plupart s'adapteraient. C'est réparable, et maintenant est le bon moment.",
+    },
+    disappearing: {
+      name: "Disparaissant en plein jour",
+      desc: "Presque personne ne le remarquerait encore. Ce n'est pas un verdict — c'est là où le travail commence.",
+    },
+  },
+};

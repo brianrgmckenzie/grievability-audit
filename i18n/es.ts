@@ -1,0 +1,135 @@
+import type { Translations } from './types';
+
+export const es: Translations = {
+  lang: 'es',
+  landing: {
+    eyebrow: 'Reframe Concepts · Misión Reimaginada',
+    titleBefore: '¿Su comunidad le ',
+    titleItalic: 'lloraría',
+    titleAfter: '?',
+    body1: 'Un diagnóstico de cinco minutos para líderes de organizaciones sin fines de lucro y de fe. No es un cuestionario. Es una lectura honesta sobre qué tan esencial es realmente su institución.',
+    body2: 'No hay nada que registrar para comenzar. Sus resultados le serán enviados por correo electrónico al final.',
+    cta: 'Iniciar la auditoría',
+    tagline: 'Imprescindible · La razón oculta · Construido para hacer falta',
+  },
+  scoring: {
+    back: 'Atrás',
+    next: 'Siguiente',
+    seeResult: 'Ver mi resultado',
+    coreDimension: 'Dimensión central · ponderada doble',
+    disagree: 'En desacuerdo',
+    agree: 'De acuerdo',
+  },
+  calculating: {
+    headline: 'Leyendo sus respuestas',
+    body: 'Evaluando lo que haría falta',
+  },
+  gate: {
+    eyebrow: 'Auditoría completa',
+    titleBefore: 'Sus resultados están ',
+    titleItalic: 'listos',
+    titleAfter: '.',
+    body: 'Díganos quién es usted y le mostraremos su puntuación completa e interpretación — aquí mismo, ahora mismo.',
+    namePlaceholder: 'Su nombre',
+    orgPlaceholder: 'Nombre de la organización',
+    emailPlaceholder: 'su@correo.org',
+    cta: 'Ver mis resultados',
+    ctaLoading: 'Leyendo sus resultados…',
+    error: 'Algo salió mal. Por favor, inténtelo de nuevo.',
+    footer: 'Sin spam · resultados enviados por correo · cancelar suscripción en cualquier momento',
+    privacyNote: 'Su nombre, correo electrónico y resultados son almacenados por Reframe Concepts para entregarle este informe y hacer seguimiento.',
+    privacyLink: 'Política de privacidad',
+    cityPlaceholder: 'Ciudad (opcional)',
+    provincePlaceholder: 'Provincia / Estado (opcional)',
+  },
+  results: {
+    reportLabel: '· Informe de Impacto',
+    headline: ', esto es lo que mostró la auditoría.',
+    scoreLabel: 'Puntuación de Impacto',
+    interpretation: 'Interpretación',
+    fullBreakdown: 'Análisis completo',
+    weightedDouble: 'ponderado ×2',
+    twoThings: 'Las dos cosas que corregir primero',
+    deeper: '¿Listo para profundizar?',
+    ctaBody: 'Esta auditoría va más lejos en la sala. Reúna a toda la junta de {org}, trabajen juntos las respuestas difíciles y salgan con un plan real.',
+    ctaButton: 'Reservar la auditoría de junta en vivo',
+    emailNote: 'Una copia de estos resultados está en camino a su bandeja de entrada.',
+  },
+  dims: [
+    {
+      name: 'Sintonía',
+      tie: 'Programa de escucha',
+      desc: 'Qué tan de cerca sigue escuchando a las personas a las que sirve.',
+      statements: [
+        'Estamos en diálogo vivo con las personas que servimos, no solo con nuestros miembros y donantes.',
+        'Podemos nombrar las necesidades que siente nuestra comunidad ahora mismo, en sus propias palabras.',
+        'Nuestro liderazgo escucha regularmente voces fuera de la institución.',
+      ],
+    },
+    {
+      name: 'Relevancia',
+      tie: 'Evaluación de necesidades',
+      desc: 'Si la necesidad para la que existe es presente, no histórica.',
+      statements: [
+        'La necesidad para la que existimos es presente y actual, no histórica ni nostálgica.',
+        'Nuestro trabajo central se ha adaptado a medida que han cambiado las necesidades de la comunidad.',
+        'Si desapareciéramos, se abriría un vacío real y presente, no solo sentimental.',
+      ],
+    },
+    {
+      name: 'Indispensabilidad',
+      tie: 'Zona de fortaleza funcional',
+      desc: 'Qué tanto lo que ofrece se superpone con lo que su comunidad realmente necesita.',
+      statements: [
+        'Lo que ofrecemos y lo que nuestra comunidad necesita se superpone estrecha y deliberadamente.',
+        'Somos fundamentales en la red de apoyo de nuestra comunidad, no un simple complemento.',
+        'Nadie más podría reemplazar fácilmente la cosa específica que hacemos.',
+      ],
+    },
+    {
+      name: 'Narrativa',
+      tie: 'Visión de impacto social',
+      desc: 'Si el futuro que está construyendo es declarado, específico y repetible.',
+      statements: [
+        'Hemos declarado claramente el futuro que estamos trabajando para construir.',
+        'Esa visión es lo suficientemente específica como para que la gente se sienta robada si nunca llegara.',
+        'Las personas fuera de nuestras paredes pueden repetirnos nuestra propia historia.',
+      ],
+    },
+    {
+      name: 'Durabilidad',
+      tie: 'Entrega operacional',
+      desc: 'Si puede entregar, y seguir entregando, a lo largo del tiempo.',
+      statements: [
+        'Somos financieramente resilientes, no viviendo de subvención en subvención.',
+        'Nuestra gobernanza es sana: roles claros, sucesión real, no dependiente de una sola persona.',
+        'Entregamos de manera consistente y confiable a lo largo del tiempo.',
+      ],
+    },
+  ],
+  recs: [
+    'Establezca un ritmo de escucha permanente. Ponga al liderazgo en la misma sala que las personas a las que sirve según un calendario, no por accidente, y anote lo que escucha.',
+    'Reaudite la necesidad en voz alta. Pregúntese si el vacío que llena es en tiempo presente, y deje que una respuesta honesta reshapee el trabajo en lugar de defenderlo.',
+    'Ajuste la superposición. Nombre la única cosa que solo usted puede hacer, y vierta atención y recursos ahí hasta que su ausencia genuinamente quiebre algo.',
+    'Declare el futuro claramente. Haga la visión tan específica que su ausencia se sienta como un robo, luego enséñela hasta que otros puedan repetirla.',
+    'Reduzca los puntos únicos de falla. Diversifique el financiamiento y aclare la sucesión para que la misión pueda sobrevivir a cualquier persona, presupuesto o temporada.',
+  ],
+  bands: {
+    loadBearing: {
+      name: 'Pilar fundamental',
+      desc: 'Su ausencia dejaría un hueco visible. Las personas reorganizarían sus vidas en torno al vacío que usted dejó.',
+    },
+    heldInAffection: {
+      name: 'Querido pero reemplazable',
+      desc: 'Lo quieren, pero puede ser reemplazado. El afecto es real; su zona de fortaleza necesita ajustarse.',
+    },
+    quietlyAtRisk: {
+      name: 'En riesgo silencioso',
+      desc: 'Algunos lo extrañarían, la mayoría se adaptaría. Esto es recuperable, y ahora es el momento de actuar.',
+    },
+    disappearing: {
+      name: 'Desapareciendo a la vista',
+      desc: 'Casi nadie lo notaría aún. No es un veredicto — es donde comienza el trabajo.',
+    },
+  },
+};
