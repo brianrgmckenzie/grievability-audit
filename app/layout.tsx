@@ -11,24 +11,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const newGaId = 'G-D979Q6TCND';
 
   return (
     <html lang="en">
+      <GoogleAnalytics gaId={newGaId} />
+      {gaId && gaId !== newGaId && (
+        <Script id="existing-ga-config" strategy="afterInteractive">
+          {`gtag('config', '${gaId}');`}
+        </Script>
+      )}
       <body>{children}</body>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-D979Q6TCND"
-        strategy="afterInteractive"
-      />
-      <Script id="google-tag-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-D979Q6TCND');
-        `}
-      </Script>
-      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }
