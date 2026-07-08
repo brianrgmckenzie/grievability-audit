@@ -1,0 +1,32 @@
+# The Grievability Audit
+
+> A free, five-minute diagnostic from Reframe Concepts that measures whether a nonprofit or faith-based organization is genuinely load-bearing in its community, or quietly replaceable. No signup required; results are scored instantly and emailed to the submitter.
+
+Reframe Concepts is an impact consulting firm based in Kelowna, BC, working with faith-based organizations, nonprofits, and land-owning for-profits on long-term sustainability, governance, and community impact.
+
+"Grievability" is the core concept: whether a community would genuinely grieve the loss of an organization, or barely notice. The audit exists to give leaders an honest, structured answer instead of a guess.
+
+## How it works
+
+The audit asks three statements per dimension across five dimensions (15 statements total), each rated on a 1-5 agreement scale. Scores combine into a final Grievability Score out of 100, placing the organization into one of four bands.
+
+## The five dimensions
+
+- Attunement: how closely the organization is still listening to the people it serves, not only its members and donors.
+- Relevance: whether the need the organization exists to meet is present tense, not historical or nostalgic.
+- Indispensability (weighted double): how tightly what the organization offers overlaps what its community actually needs; whether it is load-bearing rather than a nice-to-have.
+- Story: whether the future the organization is building is clearly declared, specific, and repeatable by outsiders.
+- Durability: whether the organization can deliver, and keep delivering, over time — financial resilience, healthy governance, consistent delivery.
+
+## The four score bands
+
+- Load bearing (82-100): the organization's absence would leave a visible hole; people would reorganize their lives around the gap.
+- Held in affection (60-81): loved, but replaceable. The warmth is real; the functional overlap with real needs needs tightening.
+- Quietly at risk (38-59): a few would grieve, most would adjust. This is closeable, and the time to close it is now.
+- Disappearing in plain sight (0-37): almost no one would notice yet. Not a verdict — where the work begins.
+
+## Links
+
+- [Take the audit](https://grievabilityaudit.com/): the live diagnostic
+- [Privacy policy](https://grievabilityaudit.com/privacy)
+- [Reframe Concepts](https://www.reframeconcepts.com): the consulting firm behind the audit
