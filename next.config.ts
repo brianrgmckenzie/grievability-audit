@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
 const securityHeaders = [
-  { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
 ];
+
+const embedOrigin = process.env.EMBED_ALLOWED_ORIGIN;
+const rootFrameAncestors = `frame-ancestors 'self'${embedOrigin ? ` ${embedOrigin}` : ''}`;
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -14,6 +16,14 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        source: '/:path+',
+        headers: [{ key: 'X-Frame-Options', value: 'DENY' }],
+      },
+      {
+        source: '/',
+        headers: [{ key: 'Content-Security-Policy', value: rootFrameAncestors }],
       },
     ];
   },

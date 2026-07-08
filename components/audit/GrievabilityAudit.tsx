@@ -10,6 +10,7 @@ import ScoringScreen from './ScoringScreen';
 import CalculatingScreen from './CalculatingScreen';
 import GateScreen from './GateScreen';
 import ResultsScreen from './ResultsScreen';
+import EmbedResizeReporter from './EmbedResizeReporter';
 
 type Screen = 'landing' | 'scoring' | 'calculating' | 'gate' | 'results';
 
@@ -115,6 +116,7 @@ function AuditContent() {
 export default function GrievabilityAudit() {
   return (
     <LanguageProvider>
+      <EmbedResizeReporter />
       <AuditContent />
     </LanguageProvider>
   );
