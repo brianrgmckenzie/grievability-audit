@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslation } from '@/context/LanguageContext';
 
 interface Props {
@@ -19,9 +20,12 @@ export default function LandingScreen({ onBegin }: Props) {
         rel="noopener noreferrer"
         style={{ display: 'inline-block', marginBottom: '28px' }}
       >
-        <img
+        <Image
           src="/reframe-logo.png"
           alt="Reframe Concepts"
+          width={166}
+          height={56}
+          priority
           style={{ height: '56px', width: 'auto', display: 'block', opacity: 0.9 }}
         />
       </a>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { allScores, finalScore, radarPoints, radarSpokes } from '@/lib/scoring';
 import type { Answers } from '@/lib/scoring';
 import { useTranslation } from '@/context/LanguageContext';
@@ -298,7 +299,13 @@ export default function ResultsScreen({ name, org, answers, narrative }: Props) 
           onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.6')}
         >
-          <img src="/reframe-logo.png" alt="Reframe Concepts" style={{ height: '40px', width: 'auto', display: 'block' }} />
+          <Image
+            src="/reframe-logo.png"
+            alt="Reframe Concepts"
+            width={119}
+            height={40}
+            style={{ height: '40px', width: 'auto', display: 'block' }}
+          />
         </a>
         <a
           href="/privacy"
