@@ -136,13 +136,16 @@ export async function generateSequenceEmail(
   ctx: SequenceContext
 ): Promise<string[] | null> {
   try {
-    const message = await client.messages.create({
+    const message = await client.beta.messages.create({
       model: 'claude-fable-5',
       max_tokens: 500,
+      betas: ['server-side-fallback-2026-06-01'],
+      fallbacks: [{ model: 'claude-opus-4-8' }],
       messages: [{ role: 'user', content: buildPrompt(slot, ctx) }],
     });
-    const block = message.content[0];
-    const text = block.type === 'text' ? block.text.trim() : '';
+    if (message.stop_reason === 'refusal') return null;
+    const textBlock = message.content.find((b) => b.type === 'text');
+    const text = textBlock && textBlock.type === 'text' ? textBlock.text.trim() : '';
     const paragraphs = text.split('\n\n').map((p) => p.trim()).filter(Boolean);
     if (paragraphs.length === 0) return null;
     return paragraphs;

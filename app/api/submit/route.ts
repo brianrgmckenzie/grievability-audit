@@ -57,9 +57,11 @@ async function generateNarrative(
   ).join('\n');
   const langName = LANG_NAMES[lang] ?? 'English';
 
-  const message = await client.messages.create({
+  const message = await client.beta.messages.create({
     model: 'claude-fable-5',
     max_tokens: 500,
+    betas: ['server-side-fallback-2026-06-01'],
+    fallbacks: [{ model: 'claude-opus-4-8' }],
     messages: [
       {
         role: 'user',
@@ -93,8 +95,10 @@ Rules:
     ],
   });
 
-  const block = message.content[0];
-  return block.type === 'text' ? block.text.trim() : '';
+  if (message.stop_reason === 'refusal') return '';
+
+  const textBlock = message.content.find((b) => b.type === 'text');
+  return textBlock && textBlock.type === 'text' ? textBlock.text.trim() : '';
 }
 
 async function sendEmails(
