@@ -149,7 +149,7 @@ async function sendEmails(
     ),
   ]);
 
-  await Promise.all([
+  const [resultsResult, leadResult] = await Promise.all([
     resend.emails.send({
       from: FROM_EMAIL,
       to: email,
@@ -165,6 +165,9 @@ async function sendEmails(
       html: leadHtml,
     }),
   ]);
+
+  if (resultsResult.error) console.error('[submit] results email failed:', resultsResult.error);
+  if (leadResult.error) console.error('[submit] lead email failed:', leadResult.error);
 }
 
 export async function POST(req: NextRequest) {
