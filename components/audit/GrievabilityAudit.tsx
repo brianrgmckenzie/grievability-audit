@@ -20,7 +20,7 @@ interface ResultsData {
   narrative: string;
 }
 
-function AuditContent() {
+function AuditContent({ testMode }: { testMode: boolean }) {
   const { lang } = useTranslation();
   const [screen, setScreen] = useState<Screen>('landing');
   const [dimIndex, setDimIndex] = useState(0);
@@ -58,7 +58,7 @@ function AuditContent() {
     const res = await fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, org, city, province, answers, lang }),
+      body: JSON.stringify({ name, email, org, city, province, answers, lang, testMode }),
     });
 
     if (!res.ok) {
@@ -80,6 +80,24 @@ function AuditContent() {
       {isScoring && <ProgressRail dimIndex={dimIndex} totalDims={5} />}
 
       <div style={{ width: '100%', maxWidth: '560px', flex: 1, display: 'flex', flexDirection: 'column', padding: '0 24px' }}>
+        {testMode && (
+          <div
+            style={{
+              fontFamily: "'Roboto', sans-serif",
+              fontSize: '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#C97A6A',
+              border: '1px solid #C97A6A',
+              borderRadius: '8px',
+              padding: '8px 14px',
+              margin: '16px 0 0',
+              textAlign: 'center',
+            }}
+          >
+            Test mode — sequence compresses to minutes
+          </div>
+        )}
         <LanguagePicker />
 
         {screen === 'landing' && (
@@ -113,11 +131,11 @@ function AuditContent() {
   );
 }
 
-export default function GrievabilityAudit() {
+export default function GrievabilityAudit({ testMode = false }: { testMode?: boolean }) {
   return (
     <LanguageProvider>
       <EmbedResizeReporter />
-      <AuditContent />
+      <AuditContent testMode={testMode} />
     </LanguageProvider>
   );
 }

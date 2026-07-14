@@ -130,11 +130,19 @@ export default async function AdminDashboard({
             / Grievability Audit
           </span>
         </div>
-        <form action="/api/admin/logout" method="POST">
-          <button type="submit" style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-            Sign out
-          </button>
-        </form>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link
+            href="/admin/test-sequence"
+            style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--amber)', textDecoration: 'none' }}
+          >
+            Test sequence
+          </Link>
+          <form action="/api/admin/logout" method="POST">
+            <button type="submit" style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+              Sign out
+            </button>
+          </form>
+        </div>
       </div>
 
       <div style={{ padding: '40px 32px', maxWidth: '1100px', margin: '0 auto' }}>

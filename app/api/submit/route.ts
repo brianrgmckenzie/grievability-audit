@@ -20,6 +20,7 @@ import { getAdminClient } from '@/lib/supabase-admin';
 import { FROM_EMAIL, INTERNAL_EMAIL, BOARD_AUDIT_URL, SITE_URL, LANG_NAMES } from '@/lib/email';
 import { scheduleFullSequence } from '@/lib/schedule-sequence';
 import type { SequenceContext } from '@/lib/sequence';
+import { verifySessionToken } from '@/lib/admin-auth';
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
@@ -177,7 +178,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
-  const { name, email, org, city, province, answers, lang } = body as {
+  const { name, email, org, city, province, answers, lang, testMode } = body as {
     name?: unknown;
     email?: unknown;
     org?: unknown;
@@ -185,9 +186,19 @@ export async function POST(req: NextRequest) {
     province?: unknown;
     answers?: unknown;
     lang?: unknown;
+    testMode?: unknown;
   };
 
   const cleanLang = typeof lang === 'string' && ['en', 'fr', 'es', 'de'].includes(lang) ? lang : 'en';
+
+  // Fast-mode sequence scheduling is only honored for an authenticated admin —
+  // never trust the client-supplied flag on its own.
+  let fastMode = false;
+  if (testMode === true) {
+    const password = process.env.ADMIN_PASSWORD;
+    const session = req.cookies.get('admin_session')?.value;
+    fastMode = !!password && !!session && (await verifySessionToken(session, password));
+  }
 
   if (typeof name !== 'string' || name.trim().length === 0) {
     return NextResponse.json({ error: 'Name is required.' }, { status: 400 });
@@ -279,7 +290,7 @@ export async function POST(req: NextRequest) {
             lowestIdx: lowestTwoIndices(scores),
             lang: cleanLang,
           };
-          await scheduleFullSequence(inserted.id, cleanEmail, unsubscribeToken, ctx);
+          await scheduleFullSequence(inserted.id, cleanEmail, unsubscribeToken, ctx, fastMode);
         } catch (err) {
           console.error('[submit] sequence scheduling failed:', err);
         }

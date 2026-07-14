@@ -6,7 +6,12 @@ import { SEQUENCE_SLOTS, type SequenceContext, type BodyLine } from '@/lib/seque
 import NurtureEmail from '@/emails/NurtureEmail';
 import { FROM_EMAIL, INTERNAL_EMAIL, SITE_URL } from '@/lib/email';
 
-function computeSendAt(dayOffset: number, baseline: Date): Date {
+function computeSendAt(dayOffset: number, baseline: Date, fast: boolean): Date {
+  // Test mode: same relative spacing, minutes instead of days, so a 21-day
+  // sequence lands in full within ~21 minutes.
+  if (fast) {
+    return new Date(baseline.getTime() + dayOffset * 60 * 1000);
+  }
   const target = new Date(baseline);
   target.setUTCDate(target.getUTCDate() + dayOffset);
   target.setUTCHours(16, 0, 0, 0);
@@ -61,7 +66,8 @@ export async function scheduleFullSequence(
   submissionId: string,
   recipientEmail: string,
   unsubscribeToken: string,
-  ctx: SequenceContext
+  ctx: SequenceContext,
+  fast = false
 ) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const baseline = new Date();
@@ -72,7 +78,7 @@ export async function scheduleFullSequence(
       const lines = slot.body(ctx);
       const trailingLink = slot.trailingLink?.(ctx);
       const subject = slot.subject(ctx);
-      const sendAt = computeSendAt(slot.dayOffset, baseline);
+      const sendAt = computeSendAt(slot.dayOffset, baseline, fast);
 
       const { data, error } = await renderAndSend(
         resend,
