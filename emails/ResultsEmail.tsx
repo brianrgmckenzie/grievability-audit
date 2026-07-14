@@ -46,20 +46,20 @@ interface Props {
 }
 
 const c = {
-  bg: '#1E1812',
-  card: '#2A2118',
-  border: '#3D3020',
-  amber: '#E0943A',
-  gold: '#F5B040',
-  cream: '#F2EAD8',
-  secondary: '#B8AE9C',
-  muted: '#8C6E42',
-  ink: '#1C1A17',
-  emailBg: '#F2EAD8',
-  emailCard: '#E8DEC8',
-  emailBorder: '#D4C8AE',
-  emailText: '#1C1A17',
-  emailSecondary: '#5C4E36',
+  bg: '#0A1628',
+  card: '#112038',
+  border: '#1C3456',
+  amber: '#5B9BD5',
+  gold: '#F2C930',
+  cream: '#DDE8F5',
+  secondary: '#6E94BA',
+  muted: '#6A91BC',
+  ink: '#080E1C',
+  emailBg: '#EEF3FA',
+  emailCard: '#E3EBF5',
+  emailBorder: '#CBD9EA',
+  emailText: '#0A1628',
+  emailSecondary: '#4A6483',
 };
 
 const mono = "'Roboto', sans-serif";
@@ -94,7 +94,7 @@ export default function ResultsEmail({
           fontStyle="normal"
         />
       </Head>
-      <Body style={{ background: '#ede6d4', margin: 0, padding: 0, fontFamily: sans }}>
+      <Body style={{ background: '#E4ECF6', margin: 0, padding: 0, fontFamily: sans }}>
         <Container
           style={{
             maxWidth: '560px',

@@ -10,13 +10,13 @@ interface Props {
 }
 
 const c = {
-  bg: '#1E1812',
-  amber: '#E0943A',
-  ink: '#1C1A17',
-  emailBg: '#F2EAD8',
-  emailText: '#1C1A17',
-  emailSecondary: '#5C4E36',
-  emailBorder: '#D4C8AE',
+  bg: '#0A1628',
+  amber: '#5B9BD5',
+  ink: '#080E1C',
+  emailBg: '#EEF3FA',
+  emailText: '#0A1628',
+  emailSecondary: '#4A6483',
+  emailBorder: '#CBD9EA',
 };
 
 const mono = "'Roboto', sans-serif";
@@ -33,7 +33,7 @@ export default function NurtureEmail({
   return (
     <Html>
       <Head />
-      <Body style={{ background: '#ede6d4', margin: 0, padding: 0, fontFamily: sans }}>
+      <Body style={{ background: '#E4ECF6', margin: 0, padding: 0, fontFamily: sans }}>
         <Container
           style={{
             maxWidth: '520px',

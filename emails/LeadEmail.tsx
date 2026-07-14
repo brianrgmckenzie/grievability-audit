@@ -19,14 +19,14 @@ interface Props {
 const mono = "'Roboto', sans-serif";
 const sans = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const c = {
-  bg: '#1E1812',
-  card: '#2A2118',
-  border: '#3D3020',
-  amber: '#E0943A',
-  gold: '#F5B040',
-  cream: '#F2EAD8',
-  secondary: '#B8AE9C',
-  muted: '#8C6E42',
+  bg: '#0A1628',
+  card: '#112038',
+  border: '#1C3456',
+  amber: '#5B9BD5',
+  gold: '#F2C930',
+  cream: '#DDE8F5',
+  secondary: '#6E94BA',
+  muted: '#6A91BC',
 };
 
 export default function LeadEmail({
@@ -41,7 +41,7 @@ export default function LeadEmail({
   return (
     <Html>
       <Head />
-      <Body style={{ background: '#120E09', margin: 0, padding: '24px', fontFamily: sans }}>
+      <Body style={{ background: '#060C16', margin: 0, padding: '24px', fontFamily: sans }}>
         <Container
           style={{
             maxWidth: '480px',
