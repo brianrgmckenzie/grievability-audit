@@ -1,14 +1,12 @@
-import { DIMS, type Answers } from '@/lib/scoring';
+import { DIMS } from '@/lib/scoring';
 import { BOARD_AUDIT_URL } from '@/lib/email';
 
 export interface SequenceContext {
   name: string;
   org: string;
-  answers: Answers;
   scores: number[];
   finalScore: number;
   bandName: string;
-  bandDesc: string;
   lowestIdx: [number, number];
   lang: string;
 }

@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { render } from '@react-email/components';
 import { getAdminClient } from '@/lib/supabase-admin';
-import { allScores, band, lowestTwoIndices, type Answers } from '@/lib/scoring';
+import { allScores, lowestTwoIndices, type Answers } from '@/lib/scoring';
 import { SEQUENCE_SLOTS, type SequenceContext, type BodyLine } from '@/lib/sequence';
 import NurtureEmail from '@/emails/NurtureEmail';
 import { FROM_EMAIL, INTERNAL_EMAIL, SITE_URL } from '@/lib/email';
@@ -131,11 +131,9 @@ export async function rescheduleSlot(
   const ctx: SequenceContext = {
     name: submission.name,
     org: submission.org,
-    answers: submission.answers as Answers,
     scores,
     finalScore: submission.final_score,
     bandName: submission.band_name,
-    bandDesc: band(submission.final_score).desc,
     lowestIdx: lowestTwoIndices(scores),
     lang: submission.lang ?? 'en',
   };

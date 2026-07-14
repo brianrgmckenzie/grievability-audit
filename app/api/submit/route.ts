@@ -273,11 +273,9 @@ export async function POST(req: NextRequest) {
           const ctx: SequenceContext = {
             name: cleanName,
             org: cleanOrg,
-            answers,
             scores,
             finalScore: score,
             bandName: bandInfo.name,
-            bandDesc: bandInfo.desc,
             lowestIdx: lowestTwoIndices(scores),
             lang: cleanLang,
           };
