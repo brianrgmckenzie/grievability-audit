@@ -100,7 +100,7 @@ export default function LeadEmail({
               }}
             >
               <Text style={{ margin: '0', color: c.muted, fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' as const }}>
-                To: hello@reframeconcepts.org
+                To: hello@reframeconcepts.com
               </Text>
               <Text style={{ margin: '4px 0 0', fontFamily: mono, fontSize: '12.5px', color: c.secondary }}>
                 <span style={{ color: c.muted }}>name</span>{'  '}{name}

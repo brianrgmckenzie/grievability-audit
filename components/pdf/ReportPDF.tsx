@@ -19,7 +19,7 @@ const NAVY = '#0F1E2E';
 const CREAM = '#F4EFE4';
 const MUTED = '#888888';
 const BORDER = '#DDDDDD';
-const CONTACT = 'hello@reframeconcepts.org  ·  reframeconcepts.com  ·  grievabilityaudit.com';
+const CONTACT = 'hello@reframeconcepts.com  ·  reframeconcepts.com  ·  grievabilityaudit.com';
 
 const s = StyleSheet.create({
   page: {

@@ -32,8 +32,8 @@ export default function PrivacyPage() {
         {section('Who we are', (
           <p style={{ margin: 0 }}>
             Reframe Concepts is an impact consulting firm based in Kelowna, BC, Canada. We operate the Grievability Audit at grievabilityaudit.com. Questions about this policy can be sent to{' '}
-            <a href="mailto:hello@reframeconcepts.org" style={{ color: 'var(--amber)', textDecoration: 'none' }}>
-              hello@reframeconcepts.org
+            <a href="mailto:hello@reframeconcepts.com" style={{ color: 'var(--amber)', textDecoration: 'none' }}>
+              hello@reframeconcepts.com
             </a>.
           </p>
         ))}
@@ -86,8 +86,8 @@ export default function PrivacyPage() {
             </ul>
             <p style={{ margin: 0 }}>
               To exercise any of these rights, email{' '}
-              <a href="mailto:hello@reframeconcepts.org" style={{ color: 'var(--amber)', textDecoration: 'none' }}>
-                hello@reframeconcepts.org
+              <a href="mailto:hello@reframeconcepts.com" style={{ color: 'var(--amber)', textDecoration: 'none' }}>
+                hello@reframeconcepts.com
               </a>{' '}
               with your name and the email address you used to submit the audit. We will respond within 30 days.
             </p>
