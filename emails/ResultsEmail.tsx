@@ -1,429 +1,143 @@
-import {
-  Html,
-  Head,
-  Body,
-  Container,
-  Section,
-  Text,
-  Hr,
-  Link,
-  Font,
-} from '@react-email/components';
-
-interface BreakdownItem {
-  eyebrow: string;
-  score: number;
-  scoreStr: string;
-  rec: string;
-}
-
-interface LowestItem {
-  eyebrow: string;
-  scoreStr: string;
-  rec: string;
-}
-
-interface RadarData {
-  grid100: string;
-  grid66: string;
-  grid33: string;
-  data: string;
-  spokes: { x: string; y: string }[];
-}
+import { Html, Head, Body, Container, Text, Link } from '@react-email/components';
+import { DIMS } from '@/lib/scoring';
 
 interface Props {
   name: string;
   org: string;
   email: string;
+  scores: number[];
   finalScore: number;
   bandName: string;
-  bandDesc: string;
   narrative: string;
-  lowest: LowestItem[];
-  breakdown: BreakdownItem[];
-  radar: RadarData;
   boardAuditUrl: string;
+  unsubscribeUrl: string;
 }
 
-const c = {
-  bg: '#0A1628',
-  card: '#112038',
-  border: '#1C3456',
-  amber: '#5B9BD5',
-  gold: '#F2C930',
-  cream: '#DDE8F5',
-  secondary: '#6E94BA',
-  muted: '#6A91BC',
-  ink: '#080E1C',
-  emailBg: '#EEF3FA',
-  emailCard: '#E3EBF5',
-  emailBorder: '#CBD9EA',
-  emailText: '#0A1628',
-  emailSecondary: '#4A6483',
+const BAND_LINES: Record<string, string> = {
+  'Load bearing':
+    'Remove this organization and a visible hole opens. The community would grieve, and soon. The work now is not to prove relevance but to protect it and compound it.',
+  'Held in affection':
+    'Loved, but not yet load bearing. Real warmth around replaceable function. Tighten the overlap between what you offer and what your community needs, and the affection becomes need.',
+  'Quietly at risk':
+    'A few would grieve. Most would adjust by Friday. The gap is nameable, and nameable means closeable. This is workable ground.',
+  'Disappearing in plain sight':
+    'The honest news is that almost no one would notice yet. The hopeful news is that this is a position, not a fate. This is exactly where the work begins.',
 };
 
-const mono = "'Roboto', sans-serif";
-const serif = "Georgia, 'Times New Roman', serif";
-const sans = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const DIM_QUESTIONS = [
+  'do you still know what your community would miss',
+  'do you meet a need they feel today',
+  'does your absence leave a hole no one else can fill',
+  'is there a future vivid enough to mourn',
+  'are you reliably, sustainably there',
+];
+
+const DIM_MOVES = [
+  'Restart a real listening program. Put leadership back in front of the people you serve before another decision is made.',
+  'Re-run your needs assessment against today, not the founding. Confirm the ache you answer is still being felt.',
+  'Tighten the overlap. Narrow your offer until it meets a felt need so exactly that you become load bearing.',
+  'Declare a future vivid enough to mourn. Give people something they would feel robbed of.',
+  'Move off the grant treadmill and harden governance, so your presence does not depend on any one person.',
+];
+
+const text = { fontSize: '15px', lineHeight: '1.65', color: '#1a1a1a', margin: '0 0 18px' };
+const small = { fontSize: '13px', lineHeight: '1.6', color: '#444', margin: '0 0 6px' };
 
 export default function ResultsEmail({
   name,
   org,
   email,
+  scores,
   finalScore,
   bandName,
-  bandDesc,
   narrative,
-  lowest,
-  breakdown,
-  radar,
   boardAuditUrl,
+  unsubscribeUrl,
 }: Props) {
   const firstName = name.split(' ')[0];
+  const lowestIdx = [0, 1, 2, 3, 4].sort((a, b) => scores[a] - scores[b]).slice(0, 2) as [number, number];
+
   return (
     <Html>
-      <Head>
-        <Font
-          fontFamily="Roboto"
-          fallbackFontFamily="sans-serif"
-          webFont={{
-            url: 'https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2',
-            format: 'woff2',
-          }}
-          fontWeight={400}
-          fontStyle="normal"
-        />
-      </Head>
-      <Body style={{ background: '#E4ECF6', margin: 0, padding: 0, fontFamily: sans }}>
-        <Container
-          style={{
-            maxWidth: '560px',
-            margin: '0 auto',
-            background: c.emailBg,
-            borderRadius: '0',
-          }}
-        >
-          {/* Header */}
-          <Section style={{ padding: '28px 32px 0' }}>
-            <Text
-              style={{
-                fontFamily: mono,
-                fontSize: '10px',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase' as const,
-                color: c.amber,
-                margin: '0 0 24px',
-              }}
-            >
-              {org} · Grievability Report
+      <Head />
+      <Body style={{ background: '#ffffff', margin: 0, padding: 0, fontFamily: 'Arial, Helvetica, sans-serif' }}>
+        <Container style={{ maxWidth: '560px', margin: '0 auto', padding: '32px 24px' }}>
+          <Text style={text}>Hi {firstName},</Text>
+
+          <Text style={text}>
+            You asked a question most leaders avoid: if {org} disappeared, would anyone grieve it? Here is your
+            honest answer, as of today.
+          </Text>
+
+          <Text style={{ ...text, fontWeight: 700 }}>
+            Your Grievability Score: {finalScore} out of 100 — {bandName}
+          </Text>
+
+          <Text style={text}>{BAND_LINES[bandName]}</Text>
+
+          <Text style={{ ...text, fontWeight: 700, marginBottom: '10px' }}>The five dimensions</Text>
+          {DIMS.map((d, i) => (
+            <Text key={i} style={small}>
+              {d.name}, {DIM_QUESTIONS[i]}: {scores[i]}
             </Text>
-            <Text
-              style={{
-                fontFamily: sans,
-                fontSize: '15px',
-                lineHeight: '1.6',
-                color: c.emailText,
-                margin: '0 0 24px',
-              }}
-            >
-              {firstName}, thank you for sitting with the hard question. Here is your read.
+          ))}
+
+          <Text style={{ ...text, marginTop: '10px' }}>
+            One note on reading these. Indispensability is weighted double in your overall score, because it is the
+            core of the whole question. An organization can score well everywhere else and still be replaceable. If
+            that number is your lowest, treat it as the headline even if the total looks healthy.
+          </Text>
+
+          <Text style={{ ...text, fontWeight: 700, marginBottom: '10px' }}>Where to start</Text>
+          <Text style={text}>
+            Your two lowest dimensions are {DIMS[lowestIdx[0]].name} and {DIMS[lowestIdx[1]].name}. Each comes with a
+            first move:
+          </Text>
+          <Text style={small}>
+            <strong>{DIMS[lowestIdx[0]].name}:</strong> {DIM_MOVES[lowestIdx[0]]}
+          </Text>
+          <Text style={{ ...small, marginBottom: '18px' }}>
+            <strong>{DIMS[lowestIdx[1]].name}:</strong> {DIM_MOVES[lowestIdx[1]]}
+          </Text>
+
+          {narrative.split('\n\n').filter(Boolean).map((para, i) => (
+            <Text key={i} style={text}>
+              {para}
             </Text>
-          </Section>
+          ))}
 
-          {/* Score card */}
-          <Section style={{ padding: '0 32px' }}>
-            <div
-              style={{
-                background: c.bg,
-                borderRadius: '16px',
-                padding: '22px',
-                marginBottom: '22px',
-                display: 'flex' as const,
-              }}
-            >
-              <div style={{ flexShrink: 0 }}>
-                <svg width="120" height="120" viewBox="0 0 160 160">
-                  <polygon points={radar.grid100} fill="none" stroke={c.border} strokeWidth="1" />
-                  <polygon points={radar.grid66} fill="none" stroke={c.border} strokeWidth="0.75" />
-                  <polygon points={radar.grid33} fill="none" stroke={c.border} strokeWidth="0.75" />
-                  {radar.spokes.map((sp, i) => (
-                    <line key={i} x1="80" y1="80" x2={sp.x} y2={sp.y} stroke={c.border} strokeWidth="0.75" />
-                  ))}
-                  <polygon points={radar.data} fill={c.amber} fillOpacity="0.32" stroke={c.gold} strokeWidth="2" />
-                </svg>
-              </div>
-              <div style={{ paddingLeft: '20px' }}>
-                <Text
-                  style={{
-                    fontFamily: mono,
-                    fontSize: '10px',
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase' as const,
-                    color: c.secondary,
-                    margin: '0 0 6px',
-                  }}
-                >
-                  Grievability Score
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: serif,
-                    fontSize: '52px',
-                    fontWeight: 500,
-                    lineHeight: '1',
-                    color: c.cream,
-                    margin: '0',
-                  }}
-                >
-                  {finalScore}
-                  <span style={{ fontSize: '20px', color: c.muted }}>/100</span>
-                </Text>
-              </div>
-            </div>
-          </Section>
+          <Text style={{ ...text, fontWeight: 700, marginBottom: '10px' }}>What this is, and is not</Text>
+          <Text style={text}>
+            This score is a mirror, not a judgement. It reflects one person&rsquo;s honest answers on one day. The
+            most useful thing you can do with it is disagree with it out loud, with your board, in the same room.
+            Where your answers and theirs diverge is usually where the real finding lives.
+          </Text>
 
-          {/* Band */}
-          <Section style={{ padding: '0 32px 22px' }}>
-            <div
-              style={{
-                borderLeft: `3px solid ${c.amber}`,
-                paddingLeft: '16px',
-                marginBottom: '26px',
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: serif,
-                  fontSize: '22px',
-                  fontWeight: 500,
-                  color: c.emailText,
-                  margin: '0 0 4px',
-                }}
-              >
-                {bandName}
-              </Text>
-              <Text
-                style={{
-                  fontSize: '14.5px',
-                  lineHeight: '1.55',
-                  color: c.emailSecondary,
-                  margin: '0',
-                }}
-              >
-                {bandDesc}
-              </Text>
-            </div>
-
-            {/* Fable narrative */}
-            {narrative.split('\n\n').map((para, i) => (
-              <Text
-                key={i}
-                style={{
-                  fontSize: '15px',
-                  lineHeight: '1.65',
-                  color: c.emailText,
-                  margin: '0 0 16px',
-                }}
-              >
-                {para}
-              </Text>
-            ))}
-          </Section>
-
-          <Hr style={{ borderColor: c.emailBorder, margin: '0 32px' }} />
-
-          {/* Two things to fix */}
-          <Section style={{ padding: '24px 32px 0' }}>
-            <Text
-              style={{
-                fontFamily: mono,
-                fontSize: '10.5px',
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase' as const,
-                color: c.emailSecondary,
-                margin: '0 0 14px',
-              }}
-            >
-              The two things to fix first
-            </Text>
-
-            {lowest.map((lo, i) => (
-              <div
-                key={i}
-                style={{
-                  background: c.emailCard,
-                  border: `1px solid ${c.emailBorder}`,
-                  borderRadius: '12px',
-                  padding: '16px',
-                  marginBottom: '12px',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex' as const,
-                    justifyContent: 'space-between' as const,
-                    marginBottom: '8px',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: serif,
-                      fontSize: '17px',
-                      fontWeight: 500,
-                      color: c.emailText,
-                      margin: '0',
-                    }}
-                  >
-                    {lo.eyebrow}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: mono,
-                      fontSize: '13px',
-                      color: c.amber,
-                      margin: '0',
-                    }}
-                  >
-                    {lo.scoreStr}
-                  </Text>
-                </div>
-                <Text
-                  style={{
-                    fontSize: '14px',
-                    lineHeight: '1.55',
-                    color: c.emailSecondary,
-                    margin: '0',
-                  }}
-                >
-                  {lo.rec}
-                </Text>
-              </div>
-            ))}
-          </Section>
-
-          <Hr style={{ borderColor: c.emailBorder, margin: '24px 32px 0' }} />
-
-          {/* Full breakdown */}
-          <Section style={{ padding: '20px 32px 0' }}>
-            <Text
-              style={{
-                fontFamily: mono,
-                fontSize: '10.5px',
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase' as const,
-                color: c.emailSecondary,
-                margin: '0 0 4px',
-              }}
-            >
-              Full breakdown
-            </Text>
-
-            {breakdown.map((bd, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: '14px 0',
-                  borderBottom: `1px solid ${c.emailBorder}`,
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex' as const,
-                    justifyContent: 'space-between' as const,
-                    marginBottom: '8px',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: mono,
-                      fontSize: '11px',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase' as const,
-                      color: c.emailText,
-                      margin: '0',
-                    }}
-                  >
-                    {bd.eyebrow}
-                  </Text>
-                  <Text
-                    style={{ fontFamily: mono, fontSize: '13px', color: c.amber, margin: '0' }}
-                  >
-                    {bd.scoreStr}
-                  </Text>
-                </div>
-                {/* Progress bar via table trick for email clients */}
-                <table
-                  cellPadding="0"
-                  cellSpacing="0"
-                  style={{ width: '100%', marginBottom: '8px' }}
-                >
-                  <tbody>
-                    <tr>
-                      <td
-                        style={{
-                          height: '5px',
-                          background: c.emailBorder,
-                          borderRadius: '999px',
-                          overflow: 'hidden',
-                        }}
-                      >
-                        <div
-                          style={{
-                            height: '5px',
-                            width: `${bd.score}%`,
-                            background: c.amber,
-                            borderRadius: '999px',
-                          }}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <Text
-                  style={{
-                    fontSize: '13.5px',
-                    lineHeight: '1.5',
-                    color: c.emailSecondary,
-                    margin: '0',
-                  }}
-                >
-                  {bd.rec}
-                </Text>
-              </div>
-            ))}
-          </Section>
-
-          {/* CTA */}
-          <Section style={{ padding: '28px 32px 32px' }}>
-            <Link
-              href={boardAuditUrl}
-              style={{
-                display: 'inline-block',
-                fontFamily: sans,
-                fontSize: '15px',
-                fontWeight: 600,
-                color: c.ink,
-                background: c.amber,
-                borderRadius: '999px',
-                padding: '14px 28px',
-                textDecoration: 'none',
-              }}
-            >
-              Book the live board audit
+          <Text style={text}>
+            If you want to run exactly that conversation, we facilitate a live version of this audit with full
+            boards. I will send a bit more about that in the coming days, or you can skip ahead:{' '}
+            <Link href={boardAuditUrl} style={{ color: '#1a56db' }}>
+              {boardAuditUrl}
             </Link>
+          </Text>
 
-            <Text
-              style={{
-                fontSize: '12px',
-                lineHeight: '1.5',
-                color: c.emailSecondary,
-                margin: '24px 0 0',
-              }}
-            >
-              You are receiving this because you completed the Grievability Audit at{' '}
-              {email}. Unsubscribe anytime.
-            </Text>
-          </Section>
+          <Text style={text}>Either way, you now know something most organizations never ask.</Text>
+
+          <Text style={{ ...text, marginTop: '24px' }}>
+            Brian McKenzie
+            <br />
+            Reframe Concepts
+            <br />
+            We move at the speed of trust.
+          </Text>
+
+          <Text style={{ fontSize: '11px', lineHeight: '1.5', color: '#888', marginTop: '32px' }}>
+            You are receiving this because you completed the Grievability Audit at {email}.{' '}
+            <Link href={unsubscribeUrl} style={{ color: '#888' }}>
+              Unsubscribe
+            </Link>
+            .
+          </Text>
         </Container>
       </Body>
     </Html>

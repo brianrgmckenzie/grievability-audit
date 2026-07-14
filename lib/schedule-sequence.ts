@@ -1,26 +1,30 @@
 import { Resend } from 'resend';
 import { render } from '@react-email/components';
-import Anthropic from '@anthropic-ai/sdk';
 import { getAdminClient } from '@/lib/supabase-admin';
 import { allScores, band, lowestTwoIndices, type Answers } from '@/lib/scoring';
-import {
-  SEQUENCE_SLOTS,
-  generateSequenceEmail,
-  type SequenceContext,
-} from '@/lib/sequence';
+import { SEQUENCE_SLOTS, type SequenceContext, type BodyLine } from '@/lib/sequence';
 import NurtureEmail from '@/emails/NurtureEmail';
-import { FROM_EMAIL, INTERNAL_EMAIL, BOARD_AUDIT_URL, SITE_URL } from '@/lib/email';
-
-const CTA_LABEL = 'Book the board audit';
+import { FROM_EMAIL, INTERNAL_EMAIL, SITE_URL } from '@/lib/email';
 
 function computeSendAt(dayOffset: number, baseline: Date): Date {
-  if (dayOffset === 0) {
-    return new Date(baseline.getTime() + 6 * 60 * 60 * 1000);
-  }
   const target = new Date(baseline);
   target.setUTCDate(target.getUTCDate() + dayOffset);
   target.setUTCHours(16, 0, 0, 0);
   return target;
+}
+
+function flattenLines(lines: BodyLine[], trailingLink?: string): string {
+  const parts = lines.map((l) => (l.href ? `${l.text}${l.text ? ' ' : ''}${l.href}` : l.text));
+  if (trailingLink) parts.push(trailingLink);
+  return parts.join('\n\n');
+}
+
+function parseBodyText(body: string): BodyLine[] {
+  return body
+    .split('\n\n')
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((text) => ({ text }));
 }
 
 async function renderAndSend(
@@ -28,16 +32,16 @@ async function renderAndSend(
   recipientEmail: string,
   unsubscribeToken: string,
   subject: string,
-  body: string[],
-  org: string,
+  firstName: string,
+  lines: BodyLine[],
+  trailingLink: string | undefined,
   sendAt: Date
 ) {
   const html = await render(
     NurtureEmail({
-      org,
-      paragraphs: body,
-      ctaUrl: BOARD_AUDIT_URL,
-      ctaLabel: CTA_LABEL,
+      firstName,
+      lines,
+      trailingLink,
       unsubscribeUrl: `${SITE_URL}/api/unsubscribe?token=${unsubscribeToken}`,
       recipientEmail,
     })
@@ -54,7 +58,6 @@ async function renderAndSend(
 }
 
 export async function scheduleFullSequence(
-  anthropic: Anthropic,
   submissionId: string,
   recipientEmail: string,
   unsubscribeToken: string,
@@ -62,12 +65,12 @@ export async function scheduleFullSequence(
 ) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const baseline = new Date();
+  const firstName = ctx.name.split(' ')[0];
 
   const results = await Promise.all(
     SEQUENCE_SLOTS.map(async (slot) => {
-      const generated = await generateSequenceEmail(anthropic, slot, ctx);
-      const usedFallback = generated === null;
-      const body = generated ?? slot.fallbackBody(ctx);
+      const lines = slot.body(ctx);
+      const trailingLink = slot.trailingLink?.(ctx);
       const subject = slot.subject(ctx);
       const sendAt = computeSendAt(slot.dayOffset, baseline);
 
@@ -76,8 +79,9 @@ export async function scheduleFullSequence(
         recipientEmail,
         unsubscribeToken,
         subject,
-        body,
-        ctx.org,
+        firstName,
+        lines,
+        trailingLink,
         sendAt
       );
       if (error) console.error(`[sequence] send failed for step ${slot.step}:`, error);
@@ -88,10 +92,10 @@ export async function scheduleFullSequence(
         day_offset: slot.dayOffset,
         send_at: sendAt.toISOString(),
         subject,
-        body: body.join('\n\n'),
+        body: flattenLines(lines, trailingLink),
         resend_email_id: data?.id ?? null,
         status: error ? ('failed' as const) : ('scheduled' as const),
-        used_fallback: usedFallback,
+        used_fallback: false,
       };
     })
   );
@@ -101,7 +105,6 @@ export async function scheduleFullSequence(
 }
 
 export async function rescheduleSlot(
-  anthropic: Anthropic,
   sequenceRowId: string,
   opts: { regenerate: boolean; subject?: string; body?: string }
 ) {
@@ -136,19 +139,20 @@ export async function rescheduleSlot(
     lowestIdx: lowestTwoIndices(scores),
     lang: submission.lang ?? 'en',
   };
+  const firstName = ctx.name.split(' ')[0];
 
   let subject: string;
-  let body: string[];
-  let usedFallback = false;
+  let lines: BodyLine[];
+  let trailingLink: string | undefined;
 
   if (opts.subject !== undefined && opts.body !== undefined) {
     subject = opts.subject;
-    body = opts.body.split('\n\n').map((p) => p.trim()).filter(Boolean);
+    lines = parseBodyText(opts.body);
+    trailingLink = undefined;
   } else if (opts.regenerate) {
-    const generated = await generateSequenceEmail(anthropic, slot, ctx);
-    usedFallback = generated === null;
-    body = generated ?? slot.fallbackBody(ctx);
     subject = slot.subject(ctx);
+    lines = slot.body(ctx);
+    trailingLink = slot.trailingLink?.(ctx);
   } else {
     throw new Error('Nothing to update');
   }
@@ -165,8 +169,9 @@ export async function rescheduleSlot(
     submission.email,
     submission.unsubscribe_token,
     subject,
-    body,
-    ctx.org,
+    firstName,
+    lines,
+    trailingLink,
     new Date(row.send_at)
   );
   if (error) console.error(`[sequence] resend failed for step ${row.step}:`, error);
@@ -175,10 +180,10 @@ export async function rescheduleSlot(
     .from('grievability_sequence_emails')
     .update({
       subject,
-      body: body.join('\n\n'),
+      body: flattenLines(lines, trailingLink),
       resend_email_id: data?.id ?? null,
       status: error ? 'failed' : 'scheduled',
-      used_fallback: usedFallback,
+      used_fallback: false,
       updated_at: new Date().toISOString(),
     })
     .eq('id', sequenceRowId);

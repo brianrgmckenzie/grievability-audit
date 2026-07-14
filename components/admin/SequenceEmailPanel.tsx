@@ -5,12 +5,11 @@ import type { SequenceEmail } from '@/lib/supabase-admin';
 import { regenerateSequenceEmail, updateSequenceEmail } from '@/app/admin/actions';
 
 const ANGLES: Record<number, string> = {
-  1: 'Same-day personal nudge',
-  2: 'Lowest dimension, one concrete move',
-  3: 'Second dimension, how they compound',
-  4: 'Name the pattern',
-  5: 'Address the hesitation',
-  6: 'The close',
+  1: 'The pattern in your lowest score',
+  2: 'Case study: Trinity United',
+  3: 'The board audit pitch',
+  4: 'Industry stat',
+  5: 'The close',
 };
 
 function formatSendAt(sendAt: string, status: SequenceEmail['status']): string {
@@ -58,11 +57,6 @@ function Row({ email }: { email: SequenceEmail }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
             <span style={{ ...labelStyle, color: 'var(--amber)' }}>Step {email.step}</span>
             <span style={{ ...labelStyle, color: 'var(--muted)' }}>{ANGLES[email.step]}</span>
-            {email.used_fallback && (
-              <span style={{ ...labelStyle, color: '#E0943A', border: '1px solid #E0943A', borderRadius: '4px', padding: '1px 6px' }}>
-                Fallback used
-              </span>
-            )}
           </div>
           <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '14px', color: 'var(--cream)' }}>
             {email.subject}
@@ -97,7 +91,7 @@ function Row({ email }: { email: SequenceEmail }) {
               });
             }}
           >
-            {isPending ? 'Working…' : 'Regenerate'}
+            {isPending ? 'Working…' : 'Reset to default'}
           </button>
         </div>
       </div>
