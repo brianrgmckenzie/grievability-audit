@@ -2,24 +2,26 @@ export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getAdminClient, type Submission } from '@/lib/supabase-admin';
+import { getAdminClient, type Submission, type SequenceEmail } from '@/lib/supabase-admin';
 import ResultsScreen from '@/components/audit/ResultsScreen';
 import { LanguageProvider } from '@/context/LanguageContext';
 import type { Answers } from '@/lib/scoring';
 import DeleteButton from '@/components/admin/DeleteButton';
+import SequenceEmailPanel from '@/components/admin/SequenceEmailPanel';
 
 export default async function ReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const { data, error } = await getAdminClient()
-    .from('grievability_submissions')
-    .select('*')
-    .eq('id', id)
-    .single();
+  const client = getAdminClient();
+  const [{ data, error }, { data: sequenceData }] = await Promise.all([
+    client.from('grievability_submissions').select('*').eq('id', id).single(),
+    client.from('grievability_sequence_emails').select('*').eq('submission_id', id),
+  ]);
 
   if (error || !data) notFound();
 
   const s = data as Submission;
+  const sequenceEmails = (sequenceData ?? []) as SequenceEmail[];
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
@@ -41,6 +43,9 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       </div>
 
       <div style={{ width: '100%', maxWidth: '560px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ paddingTop: '32px' }}>
+          <SequenceEmailPanel emails={sequenceEmails} />
+        </div>
         <LanguageProvider>
           <ResultsScreen
             name={s.name}

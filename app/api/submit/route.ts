@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { after } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { Resend } from 'resend';
 import { render } from '@react-email/components';
@@ -9,6 +10,7 @@ import {
   allScores,
   band,
   lowestTwo,
+  lowestTwoIndices,
   breakdown,
   radarPoints,
   radarSpokes,
@@ -18,10 +20,9 @@ import {
 import ResultsEmail from '@/emails/ResultsEmail';
 import LeadEmail from '@/emails/LeadEmail';
 import { getAdminClient } from '@/lib/supabase-admin';
-
-const FROM_EMAIL = 'Reframe Concepts <hello@reframeconcepts.org>';
-const INTERNAL_EMAIL = 'hello@reframeconcepts.org';
-const BOARD_AUDIT_URL = process.env.NEXT_PUBLIC_BOARD_AUDIT_URL ?? '#';
+import { FROM_EMAIL, INTERNAL_EMAIL, BOARD_AUDIT_URL, LANG_NAMES } from '@/lib/email';
+import { scheduleFullSequence } from '@/lib/schedule-sequence';
+import type { SequenceContext } from '@/lib/sequence';
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
@@ -40,13 +41,6 @@ function validateAnswers(answers: unknown): answers is Answers {
   }
   return true;
 }
-
-const LANG_NAMES: Record<string, string> = {
-  en: 'English',
-  fr: 'French',
-  es: 'Spanish',
-  de: 'German',
-};
 
 async function generateNarrative(
   client: Anthropic,
@@ -251,15 +245,52 @@ export async function POST(req: NextRequest) {
 
     if (!narrative) console.error('[submit] narrative is empty after generation');
 
-    // Persist to DB (non-fatal)
-    getAdminClient()
-      .from('grievability_submissions')
-      .insert({ name: cleanName, email: cleanEmail, org: cleanOrg, city: cleanCity, province: cleanProvince, answers, final_score: score, band_name: bandInfo.name, narrative })
-      .then(({ error: dbErr }) => { if (dbErr) console.error('[submit] db insert failed:', dbErr); });
+    // Runs after the response is sent, but Next guarantees it completes rather than
+    // getting frozen mid-flight like a bare fire-and-forget promise would.
+    after(async () => {
+      const { data: inserted, error: dbErr } = await getAdminClient()
+        .from('grievability_submissions')
+        .insert({
+          name: cleanName,
+          email: cleanEmail,
+          org: cleanOrg,
+          city: cleanCity,
+          province: cleanProvince,
+          answers,
+          final_score: score,
+          band_name: bandInfo.name,
+          narrative,
+          lang: cleanLang,
+        })
+        .select('id, unsubscribe_token')
+        .single();
 
-    // Send emails in the background — don't block the response
-    sendEmails(cleanName, cleanEmail, cleanOrg, answers, narrative).catch((err) => {
-      console.error('[submit] email send failed:', err);
+      if (dbErr || !inserted) console.error('[submit] db insert failed:', dbErr);
+
+      try {
+        await sendEmails(cleanName, cleanEmail, cleanOrg, answers, narrative);
+      } catch (err) {
+        console.error('[submit] email send failed:', err);
+      }
+
+      if (inserted) {
+        try {
+          const ctx: SequenceContext = {
+            name: cleanName,
+            org: cleanOrg,
+            answers,
+            scores,
+            finalScore: score,
+            bandName: bandInfo.name,
+            bandDesc: bandInfo.desc,
+            lowestIdx: lowestTwoIndices(scores),
+            lang: cleanLang,
+          };
+          await scheduleFullSequence(anthropic, inserted.id, cleanEmail, inserted.unsubscribe_token, ctx);
+        } catch (err) {
+          console.error('[submit] sequence scheduling failed:', err);
+        }
+      }
     });
 
     return NextResponse.json({

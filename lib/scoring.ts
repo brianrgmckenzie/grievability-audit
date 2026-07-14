@@ -114,6 +114,11 @@ export function band(f: number): { name: string; desc: string } {
   };
 }
 
+export function lowestTwoIndices(scores: number[]): [number, number] {
+  const sorted = [0, 1, 2, 3, 4].sort((a, b) => scores[a] - scores[b]);
+  return [sorted[0], sorted[1]];
+}
+
 export function lowestTwo(answers: Answers) {
   const scores = allScores(answers);
   return [0, 1, 2, 3, 4]
