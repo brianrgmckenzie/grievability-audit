@@ -35,6 +35,23 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
           ← Dashboard
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {s.unsubscribed_at && (
+            <span
+              style={{
+                fontFamily: "'Roboto', sans-serif",
+                fontSize: '10px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: '#C97A6A',
+                border: '1px solid #C97A6A',
+                borderRadius: '4px',
+                padding: '2px 8px',
+              }}
+            >
+              Unsubscribed{' '}
+              {new Date(s.unsubscribed_at).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}
+            </span>
+          )}
           <span style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)' }}>
             {s.email}
           </span>

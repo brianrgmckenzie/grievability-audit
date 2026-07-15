@@ -84,7 +84,7 @@ export default async function AdminDashboard({
   const [{ data, error, count }, allRows, { data: failedRaw, count: failedCount }] = await Promise.all([
     client
       .from('grievability_submissions')
-      .select('id, created_at, name, email, org, city, province, final_score, band_name', { count: 'exact' })
+      .select('id, created_at, name, email, org, city, province, final_score, band_name, unsubscribed_at', { count: 'exact' })
       .order('created_at', { ascending: false })
       .range(from, to),
     fetchAllAnalyticsRows(client),
@@ -96,7 +96,7 @@ export default async function AdminDashboard({
       .limit(50),
   ]);
 
-  const submissions = (data ?? []) as Pick<Submission, 'id' | 'created_at' | 'name' | 'email' | 'org' | 'city' | 'province' | 'final_score' | 'band_name'>[];
+  const submissions = (data ?? []) as Pick<Submission, 'id' | 'created_at' | 'name' | 'email' | 'org' | 'city' | 'province' | 'final_score' | 'band_name' | 'unsubscribed_at'>[];
   const totalSubmissions = count ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalSubmissions / PAGE_SIZE));
   const failedSends = (failedRaw ?? []) as unknown as FailedSend[];
@@ -300,7 +300,25 @@ export default async function AdminDashboard({
                   }}
                 >
                   <div>
-                    <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '14px', fontWeight: 500, color: 'var(--cream)' }}>{s.name}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '14px', fontWeight: 500, color: 'var(--cream)' }}>{s.name}</span>
+                      {s.unsubscribed_at && (
+                        <span
+                          style={{
+                            fontFamily: "'Roboto', sans-serif",
+                            fontSize: '9px',
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            color: '#C97A6A',
+                            border: '1px solid #C97A6A',
+                            borderRadius: '4px',
+                            padding: '1px 5px',
+                          }}
+                        >
+                          Unsubscribed
+                        </span>
+                      )}
+                    </div>
                     <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', color: 'var(--muted)', marginTop: '2px' }}>{formatDate(s.created_at)}</div>
                   </div>
                   <div style={{ paddingRight: '16px', overflow: 'hidden' }}>
