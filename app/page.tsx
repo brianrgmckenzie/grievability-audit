@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RevealObserver from '@/components/landing/RevealObserver';
+import { BOARD_AUDIT_URL } from '@/lib/email';
 import './landing.css';
 
 const TITLE = 'The Grievability Audit | Would Your Community Grieve You? | Free Assessment';
@@ -362,8 +363,8 @@ export default function LandingPage() {
                   ways one person filling out a form never reveals, and the conversation inside those gaps is where
                   the real finding lives. Fixed fee, credited in full against any larger engagement that follows.
                 </p>
-                <a className="btn btn-ghost" href="https://calendly.com/jon-reframeconcepts/30min" rel="noopener">
-                  Book a discovery call
+                <a className="btn btn-ghost" href={BOARD_AUDIT_URL} rel="noopener">
+                  Book the board audit
                 </a>
               </div>
             </div>
