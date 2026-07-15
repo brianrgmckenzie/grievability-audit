@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export interface Submission {
   id: string;
+  seq: number;
   created_at: string;
   name: string;
   email: string;

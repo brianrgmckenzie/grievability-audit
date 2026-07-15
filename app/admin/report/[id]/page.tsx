@@ -28,12 +28,17 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
 
       {/* Admin bar */}
       <div style={{ background: 'var(--card)', borderBottom: '1px solid var(--border)', padding: '12px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link
-          href="/admin"
-          style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none' }}
-        >
-          ← Dashboard
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Link
+            href="/admin"
+            style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none' }}
+          >
+            ← Dashboard
+          </Link>
+          <span style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--amber)' }}>
+            #{s.seq}
+          </span>
+        </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {s.unsubscribed_at && (
             <span
