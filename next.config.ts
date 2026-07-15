@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
         headers: [{ key: 'X-Frame-Options', value: 'DENY' }],
       },
       {
-        source: '/',
+        source: '/start',
         headers: [{ key: 'Content-Security-Policy', value: rootFrameAncestors }],
       },
     ];
