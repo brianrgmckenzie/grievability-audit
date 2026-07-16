@@ -413,8 +413,8 @@ export default function LandingPage() {
                 <summary>What happens with my email?<span className="plus">+</span></summary>
                 <p>
                   Your results are sent to it, and Reframe may follow up with a short series of notes drawn from
-                  running this audit with real boards. No spam, and you can unsubscribe at any time. See the
-                  privacy policy for full details.
+                  running this audit with real boards. No spam, and you can unsubscribe at any time. See the{' '}
+                  <Link href="/privacy" style={{ textDecoration: 'underline' }}>privacy policy</Link> for full details.
                 </p>
               </details>
               <details>
