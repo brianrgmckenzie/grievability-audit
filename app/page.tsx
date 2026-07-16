@@ -128,7 +128,7 @@ export default function LandingPage() {
               <path
                 d="M130.9,172.8 L47.1,172.8 L14.4,72.2 L100,10 L185.6,72.2 L159.7,151.9"
                 fill="none"
-                stroke="#C8923C"
+                stroke="#5B9BD5"
                 strokeWidth="14"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -147,7 +147,7 @@ export default function LandingPage() {
             <path
               d="M130.9,172.8 L47.1,172.8 L14.4,72.2 L100,10 L185.6,72.2 L159.7,151.9"
               fill="none"
-              stroke="#C8923C"
+              stroke="#5B9BD5"
               strokeWidth="7"
               strokeLinecap="round"
               strokeLinejoin="round"

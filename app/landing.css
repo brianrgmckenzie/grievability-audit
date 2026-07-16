@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,400i&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bone: #ECE6D9;
-  --bone-deep: #E1DACB;
-  --ink: #1C1A17;
-  --dusk: #222A2D;
-  --dusk-soft: #2C353A;
-  --ember: #C8923C;
-  --ember-br: #E0A648;
-  --slate: #5E6A6C;
-  --slate-on-dark: #AEB4B2;
-  --line-lt: #CFC7B5;
-  --line-dk: #3A433F;
-  --ring: #6B5A38;
+  --bone: #DDE8F5;
+  --bone-deep: #E3EBF5;
+  --ink: #0A1628;
+  --dusk: #0A1628;
+  --dusk-soft: #112038;
+  --ember: #5B9BD5;
+  --ember-br: #7CB8E8;
+  --slate: #4A6483;
+  --slate-on-dark: #6E94BA;
+  --line-lt: #CBD9EA;
+  --line-dk: #1C3456;
+  --ring: #5B9BD5;
 }
 
 .ga-landing,
