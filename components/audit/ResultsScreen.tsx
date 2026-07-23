@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { sendGAEvent } from '@next/third-parties/google';
 import { allScores, finalScore, radarPoints, radarSpokes } from '@/lib/scoring';
 import type { Answers } from '@/lib/scoring';
 import { useTranslation } from '@/context/LanguageContext';
@@ -28,6 +29,14 @@ export default function ResultsScreen({ name, org, answers, narrative }: Props) 
   const { t } = useTranslation();
   const [downloading, setDownloading] = useState(false);
   const [pdfError, setPdfError] = useState(false);
+
+  useEffect(() => {
+    sendGAEvent('event', 'audit_completed', {
+      score: finalScore(answers),
+      band: getBandT(finalScore(answers), t.bands).name,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function downloadPDF() {
     setDownloading(true);
