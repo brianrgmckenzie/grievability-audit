@@ -1,5 +1,8 @@
 export const metadata = {
   title: 'Privacy Policy — Grievability Audit',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 const section = (title: string, body: React.ReactNode) => (

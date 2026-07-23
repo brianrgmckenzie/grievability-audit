@@ -5,6 +5,7 @@ const securityHeaders = [
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
+  { key: 'X-Frame-Options', value: 'DENY' },
 ];
 
 const embedOrigin = process.env.EMBED_ALLOWED_ORIGIN;
@@ -16,10 +17,6 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
-      },
-      {
-        source: '/:path+',
-        headers: [{ key: 'X-Frame-Options', value: 'DENY' }],
       },
       {
         source: '/start',
