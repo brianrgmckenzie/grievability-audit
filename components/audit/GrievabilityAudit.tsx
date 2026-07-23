@@ -55,22 +55,30 @@ function AuditContent({ testMode }: { testMode: boolean }) {
     setScreen('calculating');
     window.scrollTo(0, 0);
 
-    const res = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, org, city, province, answers, lang, testMode }),
-    });
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, org, city, province, answers, lang, testMode }),
+      });
 
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error ?? 'Submit failed');
+      }
+
+      const data = await res.json();
+      setResults({ name, org, narrative: data.narrative });
+      setScreen('results');
+      window.scrollTo(0, 0);
+    } catch (err) {
+      // A network failure throws before any of the above runs, so without this
+      // catch the screen would be stuck on 'calculating' forever — the request
+      // never reaches the !res.ok branch above to bounce back to 'gate'.
       setScreen('gate');
-      throw new Error(body.error ?? 'Submit failed');
+      window.scrollTo(0, 0);
+      throw err;
     }
-
-    const data = await res.json();
-    setResults({ name, org, narrative: data.narrative });
-    setScreen('results');
-    window.scrollTo(0, 0);
   }
 
   const isScoring = screen === 'scoring';

@@ -96,6 +96,7 @@ export default function GateScreen({ onSubmit }: Props) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={t.gate.namePlaceholder}
+              aria-label={t.gate.namePlaceholder}
               autoComplete="name"
               disabled={sending}
               style={inputStyle}
@@ -107,6 +108,7 @@ export default function GateScreen({ onSubmit }: Props) {
               value={org}
               onChange={(e) => setOrg(e.target.value)}
               placeholder={t.gate.orgPlaceholder}
+              aria-label={t.gate.orgPlaceholder}
               autoComplete="organization"
               disabled={sending}
               style={inputStyle}
@@ -119,6 +121,7 @@ export default function GateScreen({ onSubmit }: Props) {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder={t.gate.cityPlaceholder}
+                aria-label={t.gate.cityPlaceholder}
                 autoComplete="address-level2"
                 disabled={sending}
                 style={{ ...inputStyle, flex: 1 }}
@@ -130,6 +133,7 @@ export default function GateScreen({ onSubmit }: Props) {
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
                 placeholder={t.gate.provincePlaceholder}
+                aria-label={t.gate.provincePlaceholder}
                 autoComplete="address-level1"
                 disabled={sending}
                 style={{ ...inputStyle, flex: 1 }}
@@ -142,6 +146,7 @@ export default function GateScreen({ onSubmit }: Props) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t.gate.emailPlaceholder}
+              aria-label={t.gate.emailPlaceholder}
               inputMode="email"
               autoComplete="email"
               disabled={sending}

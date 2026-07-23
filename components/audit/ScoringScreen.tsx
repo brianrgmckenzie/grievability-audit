@@ -104,6 +104,8 @@ export default function ScoringScreen({ dimIndex, answers, onAnswer, onNext, onB
               </p>
 
               <div
+                role="radiogroup"
+                aria-label={text}
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -116,6 +118,10 @@ export default function ScoringScreen({ dimIndex, answers, onAnswer, onNext, onB
                   return (
                     <button
                       key={v}
+                      type="button"
+                      role="radio"
+                      aria-checked={sel}
+                      aria-label={v === 1 ? `1 of 5, ${t.scoring.disagree}` : v === 5 ? `5 of 5, ${t.scoring.agree}` : `${v} of 5`}
                       onClick={() => onAnswer(dimIndex, sIdx, v)}
                       style={{
                         width: '44px',

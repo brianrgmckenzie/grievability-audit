@@ -40,10 +40,10 @@
 .ga-landing .btn { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; padding: 15px 26px; border-radius: 3px; transition: background .2s, color .2s, border-color .2s; cursor: pointer; }
 .ga-landing .btn-ember { background: var(--ember); color: var(--ink); border: 1.5px solid var(--ember); }
 .ga-landing .btn-ember:hover { background: var(--ember-br); border-color: var(--ember-br); }
-.ga-landing .btn-ghost { background: transparent; color: var(--bone); border: 1.5px solid #46504F; }
+.ga-landing .btn-ghost { background: transparent; color: var(--bone); border: 1.5px solid var(--line-dk); }
 .ga-landing .btn-ghost:hover { border-color: var(--ember); color: var(--ember-br); }
 
-.ga-landing .top { position: sticky; top: 0; z-index: 40; background: rgba(34,42,45,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-dk); }
+.ga-landing .top { position: sticky; top: 0; z-index: 40; background: rgba(10,22,40,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-dk); }
 .ga-landing .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
 .ga-landing .brand { display: flex; align-items: center; gap: 11px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--bone); }
 .ga-landing .brand svg { flex: none; }
