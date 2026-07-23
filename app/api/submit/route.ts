@@ -150,6 +150,7 @@ async function sendEmails(
     resend.emails.send({
       from: FROM_EMAIL,
       to: INTERNAL_EMAIL,
+      cc: 'brian@reframeconcepts.com',
       replyTo: email,
       subject: `New audit lead: ${name} · ${org} — ${score}/100 · ${bandInfo.name}`,
       html: leadHtml,

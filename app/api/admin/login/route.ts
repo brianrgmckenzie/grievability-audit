@@ -63,7 +63,7 @@ export async function POST(req: Request) {
     secure: true,
     sameSite: 'strict',
     maxAge: 60 * 60 * 24 * 7,
-    path: '/admin',
+    path: '/',
   });
   return res;
 }
