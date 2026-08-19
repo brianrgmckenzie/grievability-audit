@@ -164,8 +164,15 @@ async function sendEmails(
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
 
-  const { success } = await ratelimit.limit(ip);
-  if (!success) {
+  // Fails open: a rate-limiter outage (e.g. Upstash env vars missing/rotated)
+  // should never take down the whole intake form.
+  let allowed = true;
+  try {
+    allowed = (await ratelimit.limit(ip)).success;
+  } catch (err) {
+    console.error('[submit] rate limiter unavailable, failing open:', err);
+  }
+  if (!allowed) {
     return NextResponse.json(
       { error: 'Too many submissions. Please wait before trying again.' },
       { status: 429 }
