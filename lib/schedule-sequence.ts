@@ -188,6 +188,18 @@ export async function rescheduleSlot(
       resend_email_id: data?.id ?? null,
       status: error ? 'failed' : 'scheduled',
       used_fallback: false,
+      // The old resend_email_id is gone — any tracking recorded against it
+      // no longer applies to this (replacement) send.
+      delivered_at: null,
+      opened_at: null,
+      open_count: 0,
+      clicked_at: null,
+      click_count: 0,
+      bounced_at: null,
+      bounce_reason: null,
+      complained_at: null,
+      last_event_type: null,
+      last_event_at: null,
       updated_at: new Date().toISOString(),
     })
     .eq('id', sequenceRowId);

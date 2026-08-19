@@ -70,6 +70,47 @@ interface FailedSend {
   grievability_submissions: { name: string; org: string } | null;
 }
 
+interface BouncedSequenceRow {
+  id: string;
+  step: number;
+  subject: string;
+  submission_id: string;
+  status: 'bounced' | 'complained';
+  bounced_at: string | null;
+  complained_at: string | null;
+  bounce_reason: string | null;
+  grievability_submissions: { name: string; org: string } | null;
+}
+
+interface BouncedImmediateRow {
+  id: string;
+  email_type: 'results' | 'lead';
+  submission_id: string;
+  status: 'bounced' | 'complained';
+  bounced_at: string | null;
+  complained_at: string | null;
+  bounce_reason: string | null;
+  grievability_submissions: { name: string; org: string } | null;
+}
+
+interface BounceListItem {
+  id: string;
+  label: string;
+  submission_id: string;
+  org: string;
+  status: 'bounced' | 'complained';
+  at: string;
+  reason: string | null;
+}
+
+const SEQUENCE_ANGLES: Record<number, string> = {
+  1: 'The pattern in your lowest score',
+  2: 'Case study: Trinity United',
+  3: 'The board audit pitch',
+  4: 'Industry stat',
+  5: 'The close',
+};
+
 export default async function AdminDashboard({
   searchParams,
 }: {
@@ -80,8 +121,20 @@ export default async function AdminDashboard({
   const from = (page - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
+  const nowIso = new Date().toISOString();
+
   const client = getAdminClient();
-  const [{ data, error, count }, allRows, { data: failedRaw, count: failedCount }] = await Promise.all([
+  const [
+    { data, error, count },
+    allRows,
+    { data: failedRaw, count: failedCount },
+    { data: bouncedSeqRaw },
+    { data: bouncedImmediateRaw },
+    { count: dueCount },
+    { count: deliveredCount },
+    { count: openedCount },
+    { count: bouncedCount },
+  ] = await Promise.all([
     client
       .from('grievability_submissions')
       .select('id, seq, created_at, name, email, org, city, province, final_score, band_name, unsubscribed_at', { count: 'exact' })
@@ -94,12 +147,75 @@ export default async function AdminDashboard({
       .eq('status', 'failed')
       .order('send_at', { ascending: false })
       .limit(50),
+    client
+      .from('grievability_sequence_emails')
+      .select('id, step, subject, submission_id, status, bounced_at, complained_at, bounce_reason, grievability_submissions(name, org)')
+      .in('status', ['bounced', 'complained'])
+      .order('updated_at', { ascending: false })
+      .limit(50),
+    client
+      .from('grievability_immediate_emails')
+      .select('id, email_type, submission_id, status, bounced_at, complained_at, bounce_reason, grievability_submissions(name, org)')
+      .in('status', ['bounced', 'complained'])
+      .order('updated_at', { ascending: false })
+      .limit(50),
+    // Engagement health, scoped to sequence emails whose send time has already
+    // passed (so "due" excludes both future sends and canceled unsubscribes).
+    client
+      .from('grievability_sequence_emails')
+      .select('*', { count: 'exact', head: true })
+      .lte('send_at', nowIso)
+      .neq('status', 'canceled'),
+    client
+      .from('grievability_sequence_emails')
+      .select('*', { count: 'exact', head: true })
+      .lte('send_at', nowIso)
+      .eq('status', 'delivered'),
+    client
+      .from('grievability_sequence_emails')
+      .select('*', { count: 'exact', head: true })
+      .lte('send_at', nowIso)
+      .not('opened_at', 'is', null),
+    client
+      .from('grievability_sequence_emails')
+      .select('*', { count: 'exact', head: true })
+      .lte('send_at', nowIso)
+      .eq('status', 'bounced'),
   ]);
 
   const submissions = (data ?? []) as Pick<Submission, 'id' | 'seq' | 'created_at' | 'name' | 'email' | 'org' | 'city' | 'province' | 'final_score' | 'band_name' | 'unsubscribed_at'>[];
   const totalSubmissions = count ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalSubmissions / PAGE_SIZE));
   const failedSends = (failedRaw ?? []) as unknown as FailedSend[];
+
+  const bouncedSeq = (bouncedSeqRaw ?? []) as unknown as BouncedSequenceRow[];
+  const bouncedImmediate = (bouncedImmediateRaw ?? []) as unknown as BouncedImmediateRow[];
+  const bounceList: BounceListItem[] = [
+    ...bouncedSeq.map((r) => ({
+      id: r.id,
+      label: `Step ${r.step} · ${SEQUENCE_ANGLES[r.step] ?? r.subject}`,
+      submission_id: r.submission_id,
+      org: r.grievability_submissions?.org ?? 'Unknown org',
+      status: r.status,
+      at: r.bounced_at ?? r.complained_at ?? '',
+      reason: r.bounce_reason,
+    })),
+    ...bouncedImmediate.map((r) => ({
+      id: r.id,
+      label: r.email_type === 'results' ? 'Results email' : 'Lead notice',
+      submission_id: r.submission_id,
+      org: r.grievability_submissions?.org ?? 'Unknown org',
+      status: r.status,
+      at: r.bounced_at ?? r.complained_at ?? '',
+      reason: r.bounce_reason,
+    })),
+  ]
+    .sort((a, b) => (a.at < b.at ? 1 : -1))
+    .slice(0, 50);
+
+  const due = dueCount ?? 0;
+  const deliveryRate = due > 0 ? Math.round(((deliveredCount ?? 0) / due) * 100) : null;
+  const openRate = due > 0 ? Math.round(((openedCount ?? 0) / due) * 100) : null;
 
   const total = allRows.length;
   const avgScore = total > 0 ? Math.round(allRows.reduce((sum, r) => sum + r.final_score, 0) / total) : 0;
@@ -180,6 +296,64 @@ export default async function AdminDashboard({
             </div>
           </div>
         )}
+
+        {/* Bounced / complained */}
+        {bounceList.length > 0 && (
+          <div style={{ background: 'rgba(201, 122, 106, 0.1)', border: '1px solid #C97A6A', borderRadius: '14px', padding: '18px 24px', marginBottom: '24px' }}>
+            <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C97A6A', marginBottom: '12px' }}>
+              Bounced / marked as spam
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {bounceList.map((b) => (
+                <div key={b.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', fontSize: '13px' }}>
+                  <div
+                    style={{ color: 'var(--cream)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                    title={b.reason ?? undefined}
+                  >
+                    <span style={{ color: '#C97A6A' }}>{b.status === 'bounced' ? 'Bounced' : 'Spam'}</span>
+                    {' · '}
+                    {b.org} — {b.label}
+                  </div>
+                  <Link
+                    href={`/admin/report/${b.submission_id}`}
+                    style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#C97A6A', textDecoration: 'none', flexShrink: 0 }}
+                  >
+                    View →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Sequence email health */}
+        <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '20px 24px', marginBottom: '24px' }}>
+          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '16px' }}>
+            Sequence email health
+          </div>
+          {due === 0 ? (
+            <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '14px', color: 'var(--secondary)' }}>
+              No sequence emails due yet.
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+              {[
+                { label: 'Due so far', value: String(due) },
+                { label: 'Delivered', value: deliveryRate === null ? '—' : `${deliveryRate}%` },
+                { label: 'Opened', value: openRate === null ? '—' : `${openRate}%` },
+                { label: 'Bounced', value: String(bouncedCount ?? 0) },
+              ].map((m) => (
+                <div key={m.label}>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500, fontSize: '22px', color: 'var(--cream)' }}>{m.value}</div>
+                  <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginTop: '2px' }}>{m.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', color: 'var(--muted)', marginTop: '14px' }}>
+            &ldquo;Delivered&rdquo; and &ldquo;Opened&rdquo; reflect Resend webhook events — if these stay at 0% while emails are going out, the webhook likely isn&rsquo;t configured yet.
+          </div>
+        </div>
 
         {total > 0 && (
           <>

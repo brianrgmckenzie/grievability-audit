@@ -18,12 +18,74 @@ function formatSendAt(sendAt: string, status: SequenceEmail['status']): string {
 
   if (status === 'canceled') return 'Canceled';
   if (status === 'failed') return 'Failed to schedule';
-  if (target <= now) return `Sent ${target.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}`;
+  if (status === 'bounced') return 'Bounced';
+  if (status === 'complained') return 'Marked as spam';
+  if (status === 'delivered') return `Delivered ${target.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}`;
+  if (status === 'sent') return `Sent ${target.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })} — delivery unconfirmed`;
+
+  // status === 'scheduled': either genuinely upcoming, or the send-time has
+  // passed but no webhook event has landed yet (lag, or webhook not wired up).
+  if (target <= now) return `Sent ${target.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })} — delivery unconfirmed`;
 
   const days = Math.round((target.getTime() - now.getTime()) / 86_400_000);
   if (days <= 0) return `Sends today, ${target.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' })}`;
   if (days === 1) return 'Sends tomorrow';
   return `Sends in ${days} days`;
+}
+
+const STATUS_COLORS: Record<SequenceEmail['status'], string> = {
+  scheduled: 'var(--muted)',
+  sent: 'var(--muted)',
+  delivered: '#7EBF8E',
+  bounced: '#C97A6A',
+  complained: '#C97A6A',
+  canceled: 'var(--muted)',
+  failed: '#C97A6A',
+};
+
+function EngagementBadges({ email }: { email: SequenceEmail }) {
+  const badges: { label: string; title?: string }[] = [];
+
+  if (email.opened_at) {
+    badges.push({
+      label: `Opened${email.open_count > 1 ? ` ×${email.open_count}` : ''}`,
+      title: `First opened ${new Date(email.opened_at).toLocaleString('en-CA')}`,
+    });
+  }
+  if (email.clicked_at) {
+    badges.push({
+      label: `Clicked${email.click_count > 1 ? ` ×${email.click_count}` : ''}`,
+      title: `First clicked ${new Date(email.clicked_at).toLocaleString('en-CA')}`,
+    });
+  }
+  if (email.status === 'bounced' && email.bounce_reason) {
+    badges.push({ label: 'Bounce reason', title: email.bounce_reason });
+  }
+
+  if (badges.length === 0) return null;
+
+  return (
+    <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
+      {badges.map((b) => (
+        <span
+          key={b.label}
+          title={b.title}
+          style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontSize: '10px',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase' as const,
+            color: 'var(--amber)',
+            border: '1px solid var(--border)',
+            borderRadius: '4px',
+            padding: '2px 6px',
+          }}
+        >
+          {b.label}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 function Row({ email }: { email: SequenceEmail }) {
@@ -61,9 +123,10 @@ function Row({ email }: { email: SequenceEmail }) {
           <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '14px', color: 'var(--cream)' }}>
             {email.subject}
           </div>
-          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', color: 'var(--muted)', marginTop: '2px' }}>
+          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', color: STATUS_COLORS[email.status], marginTop: '2px' }}>
             {formatSendAt(email.send_at, email.status)}
           </div>
+          <EngagementBadges email={email} />
         </div>
 
         <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>

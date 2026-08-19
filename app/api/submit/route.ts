@@ -98,6 +98,7 @@ Hard rules:
 }
 
 async function sendEmails(
+  submissionId: string | undefined,
   name: string,
   email: string,
   org: string,
@@ -159,6 +160,27 @@ async function sendEmails(
 
   if (resultsResult.error) console.error('[submit] results email failed:', resultsResult.error);
   if (leadResult.error) console.error('[submit] lead email failed:', leadResult.error);
+
+  // Without a submission row there's nothing to attach tracking to (matches
+  // how scheduleFullSequence is likewise skipped when the insert failed).
+  if (submissionId) {
+    const rows = [
+      {
+        submission_id: submissionId,
+        email_type: 'results' as const,
+        resend_email_id: resultsResult.data?.id ?? null,
+        status: resultsResult.error ? ('failed' as const) : ('sent' as const),
+      },
+      {
+        submission_id: submissionId,
+        email_type: 'lead' as const,
+        resend_email_id: leadResult.data?.id ?? null,
+        status: leadResult.error ? ('failed' as const) : ('sent' as const),
+      },
+    ];
+    const { error: trackingErr } = await getAdminClient().from('grievability_immediate_emails').insert(rows);
+    if (trackingErr) console.error('[submit] failed to persist immediate email tracking rows:', trackingErr);
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -275,7 +297,7 @@ export async function POST(req: NextRequest) {
       if (dbErr || !inserted) console.error('[submit] db insert failed:', dbErr);
 
       try {
-        await sendEmails(cleanName, cleanEmail, cleanOrg, answers, narrative, unsubscribeToken);
+        await sendEmails(inserted?.id, cleanName, cleanEmail, cleanOrg, answers, narrative, unsubscribeToken);
       } catch (err) {
         console.error('[submit] email send failed:', err);
       }
