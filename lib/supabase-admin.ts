@@ -18,7 +18,29 @@ export interface Submission {
   unsubscribed_at: string | null;
 }
 
-export interface SequenceEmail {
+export type EmailTrackingStatus =
+  | 'scheduled'
+  | 'sent'
+  | 'delivered'
+  | 'bounced'
+  | 'complained'
+  | 'canceled'
+  | 'failed';
+
+export interface EmailTrackingFields {
+  delivered_at: string | null;
+  opened_at: string | null;
+  open_count: number;
+  clicked_at: string | null;
+  click_count: number;
+  bounced_at: string | null;
+  bounce_reason: string | null;
+  complained_at: string | null;
+  last_event_type: string | null;
+  last_event_at: string | null;
+}
+
+export interface SequenceEmail extends EmailTrackingFields {
   id: string;
   submission_id: string;
   step: number;
@@ -27,8 +49,18 @@ export interface SequenceEmail {
   subject: string;
   body: string;
   resend_email_id: string | null;
-  status: 'scheduled' | 'sent' | 'canceled' | 'failed';
+  status: EmailTrackingStatus;
   used_fallback: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ImmediateEmail extends EmailTrackingFields {
+  id: string;
+  submission_id: string;
+  email_type: 'results' | 'lead';
+  resend_email_id: string | null;
+  status: 'sent' | 'delivered' | 'bounced' | 'complained' | 'failed';
   created_at: string;
   updated_at: string;
 }
