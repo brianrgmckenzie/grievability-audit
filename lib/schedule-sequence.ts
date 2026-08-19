@@ -6,7 +6,7 @@ import { SEQUENCE_SLOTS, type SequenceContext, type BodyLine } from '@/lib/seque
 import NurtureEmail from '@/emails/NurtureEmail';
 import { FROM_EMAIL, INTERNAL_EMAIL, SITE_URL } from '@/lib/email';
 
-function computeSendAt(dayOffset: number, baseline: Date, fast: boolean): Date {
+export function computeSendAt(dayOffset: number, baseline: Date, fast: boolean): Date {
   // Test mode: same relative spacing, minutes instead of days, so a 21-day
   // sequence lands in full within ~21 minutes.
   if (fast) {
