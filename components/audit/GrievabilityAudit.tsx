@@ -22,7 +22,12 @@ interface ResultsData {
 
 function AuditContent({ testMode }: { testMode: boolean }) {
   const { lang } = useTranslation();
-  const [screen, setScreen] = useState<Screen>('landing');
+  // The marketing homepage (`/`) already serves as the landing/intro page and
+  // links its "Take the audit" CTA straight to /start, so opening on
+  // 'landing' here showed a second, near-identical intro screen before the
+  // actual questions. Starting on 'scoring' goes straight into the audit;
+  // the 'landing' screen is still reachable via Back from the first question.
+  const [screen, setScreen] = useState<Screen>('scoring');
   const [dimIndex, setDimIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [results, setResults] = useState<ResultsData | null>(null);
