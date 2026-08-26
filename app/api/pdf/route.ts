@@ -48,7 +48,6 @@ export async function POST(req: NextRequest) {
     day: 'numeric',
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const buffer = await renderToBuffer(
     React.createElement(ReportPDF, {
       name: name.trim().slice(0, 200),
@@ -57,7 +56,7 @@ export async function POST(req: NextRequest) {
       narrative: narrative.trim(),
       logoUrl,
       date,
-    }) as any
+    }) as unknown as Parameters<typeof renderToBuffer>[0]
   );
 
   const filename = `${org.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-grievability-report.pdf`;

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const metadata = {
   title: 'Privacy Policy — Grievability Audit',
   alternates: {
@@ -48,7 +50,7 @@ export default function PrivacyPage() {
               <li>Your name and email address</li>
               <li>Your organization name</li>
               <li>Your responses to the 15 self-assessment statements (numeric scores, 1–5)</li>
-              <li>An AI-generated interpretation of your results, created using Anthropic's Claude model</li>
+              <li>An AI-generated interpretation of your results, created using Anthropic&rsquo;s Claude model</li>
             </ul>
             <p style={{ margin: 0 }}>We do not collect payment information, government IDs, or any data beyond what is listed above.</p>
           </>
@@ -99,17 +101,17 @@ export default function PrivacyPage() {
 
         {section('Legal basis', (
           <p style={{ margin: 0 }}>
-            This policy is written in compliance with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA). If you are located in the European Union, our lawful basis for processing is your implied consent provided at the time of form submission, with the right to withdraw at any time by contacting us.
+            This policy is written in compliance with Canada&rsquo;s Personal Information Protection and Electronic Documents Act (PIPEDA). If you are located in the European Union, our lawful basis for processing is your implied consent provided at the time of form submission, with the right to withdraw at any time by contacting us.
           </p>
         ))}
 
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '32px', marginTop: '8px' }}>
-          <a
+          <Link
             href="/"
             style={{ fontFamily: "'Roboto', sans-serif", fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none' }}
           >
             ← Back to audit
-          </a>
+          </Link>
         </div>
       </div>
     </div>
