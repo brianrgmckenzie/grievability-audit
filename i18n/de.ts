@@ -2,6 +2,143 @@ import type { Translations } from './types';
 
 export const de: Translations = {
   lang: 'de',
+  home: {
+    nav: {
+      brand: 'The Grievability Audit',
+      cta: 'Audit starten',
+    },
+    hero: {
+      eyebrow: 'Eine kostenlose Einschätzung von Reframe Concepts',
+      titleBefore: 'Würde Ihre Gemeinschaft Sie ',
+      titleItalic: 'betrauern',
+      titleAfter: '?',
+      lede: 'Die meisten Organisationen messen, was sie tun. Dies misst, ob jemand es vermissen würde. Fünfzehn ehrliche Aussagen, fünf Minuten, eine Zahl, und Ihre vollständigen Ergebnisse direkt in Ihr Postfach.',
+      cta: 'Audit starten',
+      micro: 'Kostenlos · 5 Minuten · Kein Konto nötig',
+    },
+    why: {
+      eyebrow: 'Warum es das gibt',
+      head: 'Aktivität ist nicht Wirkung.',
+      p1: 'Jede gemeinnützige Organisation, jede Kirche, jede missionarische Organisation misst irgendetwas. Programme laufen. Spendengelder werden gesammelt. Besucherzahlen werden gezählt. All das ist real, und nichts davon ist der eigentliche Punkt. Diese Zahlen messen, wie beschäftigt Sie sind. Sie sagen nichts darüber aus, ob die Gemeinschaft um Sie herum eine Lücke spüren würde, wenn Sie verschwänden.',
+      p2: 'Diese Lücke ist heute wichtiger denn je. Gemeinden altern. Spenden gehen zurück. Gebäude, die über Generationen hinweg Stadtviertel verankert haben, werden still zu Kosten, die man verteidigen muss, statt zu Präsenzen, auf die man zählen kann. Und die meisten Vorstände spüren das lange bevor es jemand laut ausspricht.',
+      pull: 'Eine Organisation, die niemand betrauern würde, hat bereits still begonnen zu verschwinden. Die gute Nachricht: Das ist eine Position, kein Schicksal.',
+      stat1Big: '9.000',
+      stat1Lab: 'kanadische Glaubensgebäude, die innerhalb eines Jahrzehnts von Schließung bedroht sind',
+      stat2Big: '15,5 Mrd. $',
+      stat2Lab: 'an jährlichem zivilgesellschaftlichem Wert, der an diese Räume gebunden ist',
+      sourcePrefix: 'Quelle: ',
+      sourceLinkText: 'Sacred Spaces, Civic Value',
+      sourceSuffix: ', Canadian Urban Institute.',
+    },
+    dims: {
+      eyebrow: 'Was gemessen wird',
+      head: 'Fünf Dimensionen der Präsenz',
+      intro: 'Unverzichtbarkeit ist kein vages Gefühl. Sie lässt sich bewerten. Das Audit misst Ihre Organisation anhand von fünf Dimensionen, jede ein anderer Test dafür, ob Ihre Arbeit fehlen würde.',
+      coreTag: 'Der Kern, doppelt gewichtet',
+      rows: [
+        { name: 'Feingefühl', question: 'Wissen Sie noch, was Ihrer Gemeinschaft fehlen würde?' },
+        { name: 'Relevanz', question: 'Erfüllen Sie ein Bedürfnis, das heute spürbar ist, nicht eines, das verblasst ist?' },
+        { name: 'Unverzichtbarkeit', question: 'Hinterlässt Ihre Abwesenheit eine Lücke, die niemand sonst füllen kann?' },
+        { name: 'Erzählung', question: 'Gibt es eine Zukunft, die lebendig genug ist, dass Menschen sie betrauern würden?' },
+        { name: 'Dauerhaftigkeit', question: 'Sind Sie zuverlässig, nachhaltig und verlässlich präsent?' },
+      ],
+    },
+    how: {
+      eyebrow: 'So funktioniert es',
+      head: 'Fünf Minuten. Ein ehrlicher Spiegel.',
+      steps: [
+        {
+          title: 'Fünfzehn Aussagen beantworten',
+          body: 'Bewerten Sie jede von stimme überhaupt nicht zu bis stimme voll zu, so wie Ihre Organisation heute ehrlich ist, nicht wie sie es sich erhofft. Kein Konto, keine Anmeldung nötig, um zu beginnen.',
+        },
+        {
+          title: 'Wir lesen Ihr Ergebnis',
+          body: 'Ihre Antworten werden über die fünf Dimensionen ausgewertet, wobei Unverzichtbarkeit doppelt gewichtet wird, und eine persönliche schriftliche Interpretation wird für Ihr spezifisches Ergebnis erstellt.',
+        },
+        {
+          title: 'Ihr Bericht kommt per E-Mail',
+          body: 'Ihr Ergebnis, Ihre Aufschlüsselung nach fünf Dimensionen, Ihre zwei schwächsten Dimensionen, und der erste Schritt, um jede davon zu verbessern. Zum Behalten, und um es Ihrem Vorstand vorzulegen.',
+        },
+      ],
+    },
+    receive: {
+      eyebrow: 'Was Sie erhalten',
+      head: 'Ein Bericht, gemacht für eine Vorstandssitzung',
+      items: [
+        { bold: 'Ihr Ergebnis', rest: ', eine ehrliche Zahl von 0 bis 100, mit einem klar verständlichen Urteil.' },
+        { bold: 'Ihr Fünf-Dimensionen-Profil', rest: ', das genau zeigt, wo Ihre Präsenz stark ist und wo sie schwächer wird.' },
+        { bold: 'Ihre zwei schwächsten Dimensionen', rest: ', benannt, mit dem konkreten ersten Schritt, der jede davon zu verbessern beginnt.' },
+        { bold: 'Eine persönliche Interpretation', rest: ', geschrieben für Ihr Ergebnis, keine generische Vorlage, endend mit einer Frage, die es wert ist, bei Ihrer nächsten Vorstandssitzung aufgeworfen zu werden.' },
+      ],
+      cta: 'Audit starten',
+    },
+    who: {
+      eyebrow: 'Wer dahintersteht',
+      head: 'Entwickelt von Reframe Concepts',
+      p1: 'Reframe Concepts ist eine kanadische Beratungsfirma für Wirkung, Nachhaltigkeit und Governance mit Sitz in Kelowna, British Columbia, die mit landbesitzenden gemeinnützigen Organisationen, Kirchen und Glaubensgemeinschaften im ganzen Land zusammenarbeitet. Gegründet von Brian McKenzie und Laurence East, steht die Firma auf der Seite des Kunden, nicht des Bauträgers, und hilft Vorständen, gut geführte Entscheidungen über ihr Land, ihre Gebäude und ihre Mission zu treffen.',
+      p2: 'Das Audit destilliert, was Reframe in echten Vorstandssitzungen gelernt hat, zu einem einzigen Instrument: Die Organisationen, die Bestand haben, sind nicht die beschäftigtsten, sondern jene, die fehlen würden. Wir machen missionarische Organisationen unverzichtbar, indem wir ihr verborgenes Warum freilegen, damit sie so gebaut sind, dass sie fehlen.',
+      p3: 'Wir bewegen uns im Tempo des Vertrauens.',
+      proofTitle: 'Trinity United Church, Vernon',
+      proofBody: 'Viereinhalb Hektar untergenutztes Kirchenland, das nun auf eine gemischt finanzierte Gemeinschaft mit 250 Einheiten zusteuert, darunter 161 betreute Wohnungen, mit bereits gesicherten Absichtserklärungen.',
+      quote: 'Reframe hat Optionen präsentiert, die sowohl erreichbar als auch enorm spannend erscheinen. Ich habe großes Vertrauen in ihre Kompetenz, uns durch das zu führen, was sonst eine unmöglich einschüchternde Aufgabe gewesen wäre.',
+      quoteWho: 'Pfarrerin Robin Jacobson, leitende Pfarrerin, Trinity United Church',
+    },
+    options: {
+      eyebrow: 'Zwei Wege, es durchzuführen',
+      head: 'Allein beginnen. Gemeinsam vertiefen.',
+      tier1Tag: 'Kostenlos, selbstständig',
+      tier1Title: 'Das Online-Audit',
+      tier1Body: 'Führen Sie es selbst in fünf Minuten durch. Ihr vollständiger Bericht — Ergebnis, Profil, schwächste Dimensionen und eine persönliche Interpretation — kommt per E-Mail. Der ehrliche Ausgangspunkt für jede Führungskraft, die sich still gefragt hat, ob ihre Organisation fehlen würde.',
+      tier1Cta: 'Audit starten',
+      tier2Tag: 'Moderiert, Festpreis',
+      tier2Title: 'Live mit Ihrem Vorstand',
+      tier2Body: 'Neunzig Minuten, Ihr gesamter Vorstand, alle bewerten im selben Raum. Einzelne Antworten weichen auf eine Weise voneinander ab, die ein einzelnes Formular nie offenbart, und das Gespräch in diesen Lücken ist, wo der eigentliche Befund liegt. Festpreis, vollständig angerechnet auf jedes größere Mandat, das folgt.',
+      tier2Cta: 'Vorstands-Audit buchen',
+    },
+    faq: {
+      eyebrow: 'Fragen',
+      head: 'Häufig gestellte Fragen',
+      items: [
+        {
+          q: 'Was ist der Grievability Audit?',
+          a: 'Eine kostenlose Fünf-Minuten-Einschätzung für gemeinnützige Organisationen, Kirchen und missionarische Organisationen. Sie bewertet Ihre Organisation anhand von fünf Dimensionen der Präsenz und beantwortet eine ehrliche Frage: Wenn Sie morgen verschwänden, würde Ihre Gemeinschaft den Verlust betrauern?',
+        },
+        {
+          q: 'Ist es wirklich kostenlos?',
+          a: 'Ja. Das selbstständige Audit ist völlig kostenlos. Sie beantworten fünfzehn Aussagen, und Ihre vollständigen Ergebnisse werden an Ihre E-Mail gesendet. Eine kostenpflichtige, moderierte Version, live mit Ihrem gesamten Vorstand durchgeführt, ist ebenfalls für Organisationen verfügbar, die tiefer gehen möchten.',
+        },
+        {
+          q: 'Was bedeutet Unverzichtbarkeit eigentlich?',
+          a: 'Unverzichtbarkeit ist der ehrliche Test der Wirkung. Nicht ob Ihre Organisation beschäftigt, gut finanziert oder sogar beliebt ist, sondern ob Ihre Abwesenheit ein echtes Loch in Ihrer Gemeinschaft hinterlassen würde. Eine Organisation, die niemand betrauern würde, hat bereits still begonnen zu verschwinden.',
+        },
+        {
+          q: 'Für wen ist das gedacht?',
+          a: 'Vorstandsvorsitzende, Pastoren, Geschäftsführer und Führungskräfte gemeinnütziger Organisationen, Wohltätigkeitsorganisationen, Kirchen und Glaubensgemeinschaften, besonders Organisationen, die Land oder Gebäude besitzen und spüren, dass sie mehr für ihre Gemeinschaft tun sollten, als sie es derzeit tun.',
+        },
+        {
+          q: 'Wer hat das entwickelt?',
+          a: 'Reframe Concepts, eine kanadische Beratungsfirma für Wirkung, Nachhaltigkeit und Governance mit Sitz in Kelowna, British Columbia, die mit landbesitzenden gemeinnützigen Organisationen und Glaubensgemeinschaften im ganzen Land zusammenarbeitet.',
+        },
+      ],
+      emailQuestion: 'Was passiert mit meiner E-Mail?',
+      emailAnswerPrefix: 'Ihre Ergebnisse werden dorthin gesendet, und Reframe könnte mit einer kurzen Reihe von Notizen nachfassen, die aus der Durchführung dieses Audits mit echten Vorständen stammen. Kein Spam, und Sie können sich jederzeit abmelden. Siehe die ',
+      emailAnswerLinkText: 'Datenschutzrichtlinie',
+      emailAnswerSuffix: ' für alle Details.',
+    },
+    final: {
+      eyebrow: 'Beginnen',
+      head: 'Finden Sie heraus, wo Sie stehen.',
+      body: 'Fünfzehn Aussagen. Fünf Minuten. Eine Zahl, nach der die meisten Organisationen nie fragen, und die zwei Schritte, die sie zu verändern beginnen.',
+      cta: 'Audit starten',
+      micro: 'Kostenlos · Ergebnisse per E-Mail · Entwickelt von Reframe Concepts',
+    },
+    footer: {
+      brand: 'The Grievability Audit',
+      by: 'von',
+      privacy: 'Datenschutz',
+      meta: 'Kelowna, BC · Unverzichtbar · Verborgener Grund · Gebaut, um zu fehlen',
+    },
+  },
   landing: {
     eyebrow: 'Reframe Concepts · Mission Neu Gedacht',
     titleBefore: 'Würde Ihre Gemeinschaft Sie ',
