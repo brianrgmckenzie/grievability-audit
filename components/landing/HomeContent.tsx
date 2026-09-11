@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import RevealObserver from '@/components/landing/RevealObserver';
 import LanguagePicker from '@/components/LanguagePicker';
 import { BOARD_AUDIT_URL } from '@/lib/email';
@@ -151,6 +152,15 @@ function HomeBody() {
           <div className="wrap reveal">
             <p className="eyebrow"><span className="dot"></span> {h.who.eyebrow}</p>
             <h2 className="head">{h.who.head}</h2>
+            <a href="https://www.reframeconcepts.com/" rel="noopener" style={{ display: 'inline-block', marginTop: 22 }}>
+              <Image
+                src="/reframe-logo-for-light-bg.png"
+                alt="Reframe Concepts"
+                width={150}
+                height={50}
+                style={{ height: '42px', width: 'auto', display: 'block' }}
+              />
+            </a>
             <div className="who-grid" style={{ marginTop: 26 }}>
               <div className="body">
                 <p>{h.who.p1}</p>
