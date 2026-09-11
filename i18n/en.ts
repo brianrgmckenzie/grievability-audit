@@ -2,6 +2,143 @@ import type { Translations } from './types';
 
 export const en: Translations = {
   lang: 'en',
+  home: {
+    nav: {
+      brand: 'The Grievability Audit',
+      cta: 'Take the audit',
+    },
+    hero: {
+      eyebrow: 'A free assessment by Reframe Concepts',
+      titleBefore: 'Would your community ',
+      titleItalic: 'grieve',
+      titleAfter: ' you?',
+      lede: 'Most organizations measure what they do. This measures whether anyone would miss it. Fifteen honest statements, five minutes, one number, and your full results sent straight to your inbox.',
+      cta: 'Take the audit',
+      micro: 'Free · 5 minutes · No account needed',
+    },
+    why: {
+      eyebrow: 'Why this exists',
+      head: 'Activity is not impact.',
+      p1: 'Every nonprofit, church, and mission organization tracks something. Programs run. Dollars raised. Attendance counted. All of it real, and none of it the point. Those numbers measure how busy you are. They say nothing about whether the community around you would feel a hole if you were gone.',
+      p2: 'That gap matters more now than it ever has. Congregations are aging. Giving is thinning. Buildings that anchored neighbourhoods for generations are quietly becoming costs to defend instead of presences to count on. And most boards sense it long before anyone says it out loud.',
+      pull: 'An organization nobody would grieve has quietly already begun to disappear. The good news: that is a position, not a fate.',
+      stat1Big: '9,000',
+      stat1Lab: 'Canadian faith buildings at risk of closing within a decade',
+      stat2Big: '$15.5B',
+      stat2Lab: 'in annual civic value tied to those spaces',
+      sourcePrefix: 'Source: ',
+      sourceLinkText: 'Sacred Spaces, Civic Value',
+      sourceSuffix: ', Canadian Urban Institute.',
+    },
+    dims: {
+      eyebrow: 'What it measures',
+      head: 'Five dimensions of presence',
+      intro: 'Grievability is not a vague feeling. It can be scored. The audit measures your organization across five dimensions, each one a different test of whether your work would be missed.',
+      coreTag: 'The core, weighted double',
+      rows: [
+        { name: 'Attunement', question: 'Do you still know what your community would miss?' },
+        { name: 'Relevance', question: 'Do you meet a need they feel today, not one that has faded?' },
+        { name: 'Indispensability', question: 'Does your absence leave a hole no one else can fill?' },
+        { name: 'Story', question: 'Is there a future vivid enough that people would mourn it?' },
+        { name: 'Durability', question: 'Are you reliably, sustainably, dependably there?' },
+      ],
+    },
+    how: {
+      eyebrow: 'How it works',
+      head: 'Five minutes. One honest mirror.',
+      steps: [
+        {
+          title: 'Answer fifteen statements',
+          body: 'Score each from strongly disagree to strongly agree, as your organization honestly is today, not as it hopes to be. No account, no signup to begin.',
+        },
+        {
+          title: 'We read your result',
+          body: 'Your answers are scored across the five dimensions, with indispensability weighted double, and a personalized written interpretation is prepared for your specific result.',
+        },
+        {
+          title: 'Your report arrives by email',
+          body: 'Your Grievability Score, your five dimension breakdown, your two weakest dimensions, and the first move that closes each. Yours to keep, and to bring to your board.',
+        },
+      ],
+    },
+    receive: {
+      eyebrow: 'What you receive',
+      head: 'A report built for a board meeting',
+      items: [
+        { bold: 'Your Grievability Score', rest: ', a single honest number from 0 to 100, with a plain language verdict.' },
+        { bold: 'Your five dimension profile', rest: ', showing exactly where your presence is strong and where it is thinning.' },
+        { bold: 'Your two lowest dimensions', rest: ', named, with the specific first move that starts closing each one.' },
+        { bold: 'A personalized interpretation', rest: ', written for your result, not a generic template, ending with one question worth raising at your next board meeting.' },
+      ],
+      cta: 'Take the audit',
+    },
+    who: {
+      eyebrow: 'Who is behind it',
+      head: 'Built by Reframe Concepts',
+      p1: "Reframe Concepts is a Canadian impact, sustainability, and governance consultancy based in Kelowna, BC, working with land owning nonprofits, churches, and faith communities across the country. Founded by Brian McKenzie and Laurence East, the firm sits on the client's side of the table, not the developer's, helping boards make well governed decisions about their land, their buildings, and their mission.",
+      p2: 'The audit distills what Reframe has learned in real board rooms into one instrument: that the organizations which last are not the busiest ones, they are the ones that would be missed. We make mission organizations grievable, by excavating their hidden why, so they are built to be missed.',
+      p3: 'We move at the speed of trust.',
+      proofTitle: 'Trinity United Church, Vernon',
+      proofBody: 'Four and a half acres of underused church land, now advancing toward a 250 unit mixed income community, 161 supportive homes among them, with letters of intent secured.',
+      quote: 'Reframe presented options that seem both achievable as well as hugely exciting. I have great confidence in their competence in leading us through what would otherwise be an impossibly daunting task.',
+      quoteWho: 'Rev Robin Jacobson, Lead Minister, Trinity United Church',
+    },
+    options: {
+      eyebrow: 'Two ways to run it',
+      head: 'Start alone. Go deeper together.',
+      tier1Tag: 'Free, self serve',
+      tier1Title: 'The online audit',
+      tier1Body: 'Take it yourself in five minutes. Your full report, score, profile, weakest dimensions, and a personalized interpretation, arrives by email. The honest starting point for any leader who has quietly wondered whether their organization would be missed.',
+      tier1Cta: 'Take the audit',
+      tier2Tag: 'Facilitated, fixed fee',
+      tier2Title: 'Live with your board',
+      tier2Body: 'Ninety minutes, your full board, everyone scoring in the same room. Individual answers diverge in ways one person filling out a form never reveals, and the conversation inside those gaps is where the real finding lives. Fixed fee, credited in full against any larger engagement that follows.',
+      tier2Cta: 'Book the board audit',
+    },
+    faq: {
+      eyebrow: 'Questions',
+      head: 'Frequently asked questions',
+      items: [
+        {
+          q: 'What is the Grievability Audit?',
+          a: 'A free five minute assessment for nonprofits, churches, and mission organizations. It scores your organization across five dimensions of presence and answers one honest question: if you disappeared tomorrow, would your community grieve the loss?',
+        },
+        {
+          q: 'Is it really free?',
+          a: 'Yes. The self serve audit is completely free. You answer fifteen statements and your full results are sent to your email. A paid, facilitated version run live with your full board is also available for organizations that want to go deeper.',
+        },
+        {
+          q: 'What does grievability actually mean?',
+          a: 'Grievability is the honest test of impact. Not whether your organization is busy, well funded, or even loved, but whether your absence would leave a real hole in your community. An organization nobody would grieve has quietly already begun to disappear.',
+        },
+        {
+          q: 'Who is this for?',
+          a: 'Board chairs, pastors, executive directors, and leaders of nonprofits, charities, churches, and faith communities, especially organizations that own land or buildings and sense they should be doing more for their community than they currently are.',
+        },
+        {
+          q: 'Who built this?',
+          a: 'Reframe Concepts, a Canadian impact, sustainability, and governance consultancy based in Kelowna, BC, working with land owning nonprofits and faith communities across the country.',
+        },
+      ],
+      emailQuestion: 'What happens with my email?',
+      emailAnswerPrefix: 'Your results are sent to it, and Reframe may follow up with a short series of notes drawn from running this audit with real boards. No spam, and you can unsubscribe at any time. See the ',
+      emailAnswerLinkText: 'privacy policy',
+      emailAnswerSuffix: ' for full details.',
+    },
+    final: {
+      eyebrow: 'Begin',
+      head: 'Find out where you stand.',
+      body: 'Fifteen statements. Five minutes. One number most organizations never ask for, and the two moves that start changing it.',
+      cta: 'Take the audit',
+      micro: 'Free · Results by email · Built by Reframe Concepts',
+    },
+    footer: {
+      brand: 'The Grievability Audit',
+      by: 'by',
+      privacy: 'Privacy',
+      meta: 'Kelowna, BC · Grievable · Hidden Why · Built to Be Missed',
+    },
+  },
   landing: {
     eyebrow: 'Reframe Concepts · Mission Reimagined',
     titleBefore: 'Would your community ',

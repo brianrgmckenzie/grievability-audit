@@ -2,6 +2,143 @@ import type { Translations } from './types';
 
 export const es: Translations = {
   lang: 'es',
+  home: {
+    nav: {
+      brand: 'The Grievability Audit',
+      cta: 'Realizar la auditoría',
+    },
+    hero: {
+      eyebrow: 'Una evaluación gratuita de Reframe Concepts',
+      titleBefore: '¿Su comunidad le ',
+      titleItalic: 'lloraría',
+      titleAfter: '?',
+      lede: 'La mayoría de las organizaciones miden lo que hacen. Esto mide si alguien notaría su ausencia. Quince afirmaciones honestas, cinco minutos, un número, y sus resultados completos enviados directamente a su bandeja de entrada.',
+      cta: 'Realizar la auditoría',
+      micro: 'Gratis · 5 minutos · Sin necesidad de cuenta',
+    },
+    why: {
+      eyebrow: 'Por qué existe esto',
+      head: 'La actividad no es impacto.',
+      p1: 'Toda organización sin fines de lucro, iglesia y organización misional mide algo. Programas que funcionan. Dólares recaudados. Asistencia contada. Todo real, y nada de eso es lo importante. Esos números miden qué tan ocupados están. No dicen nada sobre si la comunidad a su alrededor sentiría un vacío si desaparecieran.',
+      p2: 'Esa brecha importa más ahora que nunca. Las congregaciones envejecen. Las donaciones disminuyen. Edificios que anclaron vecindarios durante generaciones se están convirtiendo silenciosamente en costos que defender en lugar de presencias con las que contar. Y la mayoría de las juntas directivas lo sienten mucho antes de que alguien lo diga en voz alta.',
+      pull: 'Una organización a la que nadie lloraría ya ha comenzado silenciosamente a desaparecer. La buena noticia: eso es una posición, no un destino.',
+      stat1Big: '9,000',
+      stat1Lab: 'edificios religiosos canadienses en riesgo de cerrar en la próxima década',
+      stat2Big: '15,5 mil millones de dólares',
+      stat2Lab: 'en valor cívico anual vinculado a esos espacios',
+      sourcePrefix: 'Fuente: ',
+      sourceLinkText: 'Sacred Spaces, Civic Value',
+      sourceSuffix: ', Canadian Urban Institute.',
+    },
+    dims: {
+      eyebrow: 'Qué mide',
+      head: 'Cinco dimensiones de presencia',
+      intro: 'Lo imprescindible no es un sentimiento vago. Se puede medir. La auditoría evalúa su organización en cinco dimensiones, cada una una prueba distinta de si su trabajo haría falta.',
+      coreTag: 'El núcleo, ponderado doble',
+      rows: [
+        { name: 'Sintonía', question: '¿Todavía sabe qué extrañaría su comunidad?' },
+        { name: 'Relevancia', question: '¿Atiende una necesidad que se siente hoy, no una que ya se desvaneció?' },
+        { name: 'Imprescindibilidad', question: '¿Su ausencia deja un vacío que nadie más puede llenar?' },
+        { name: 'Relato', question: '¿Existe un futuro lo bastante vívido como para que la gente lo eche de menos?' },
+        { name: 'Durabilidad', question: '¿Está presente de forma confiable, sostenible y constante?' },
+      ],
+    },
+    how: {
+      eyebrow: 'Cómo funciona',
+      head: 'Cinco minutos. Un espejo honesto.',
+      steps: [
+        {
+          title: 'Responda quince afirmaciones',
+          body: 'Califique cada una desde muy en desacuerdo hasta muy de acuerdo, según cómo es su organización hoy honestamente, no como espera que sea. Sin cuenta, sin registro para comenzar.',
+        },
+        {
+          title: 'Analizamos su resultado',
+          body: 'Sus respuestas se evalúan en las cinco dimensiones, con la imprescindibilidad ponderada doble, y se prepara una interpretación escrita personalizada para su resultado específico.',
+        },
+        {
+          title: 'Su informe llega por correo electrónico',
+          body: 'Su puntuación, el desglose de sus cinco dimensiones, sus dos dimensiones más débiles, y el primer paso para mejorar cada una. Suyo para conservar, y para llevar a su junta directiva.',
+        },
+      ],
+    },
+    receive: {
+      eyebrow: 'Lo que recibe',
+      head: 'Un informe hecho para una reunión de junta directiva',
+      items: [
+        { bold: 'Su puntuación', rest: ', un número honesto de 0 a 100, con un veredicto en lenguaje claro.' },
+        { bold: 'Su perfil de cinco dimensiones', rest: ', mostrando exactamente dónde su presencia es fuerte y dónde se está debilitando.' },
+        { bold: 'Sus dos dimensiones más bajas', rest: ', nombradas, con el primer paso específico que comienza a cerrar cada una.' },
+        { bold: 'Una interpretación personalizada', rest: ', escrita para su resultado, no una plantilla genérica, terminando con una pregunta que vale la pena plantear en su próxima reunión de junta directiva.' },
+      ],
+      cta: 'Realizar la auditoría',
+    },
+    who: {
+      eyebrow: 'Quién está detrás',
+      head: 'Creado por Reframe Concepts',
+      p1: 'Reframe Concepts es una consultora canadiense de impacto, sostenibilidad y gobernanza con sede en Kelowna, Columbia Británica, que trabaja con organizaciones sin fines de lucro propietarias de terrenos, iglesias y comunidades de fe en todo el país. Fundada por Brian McKenzie y Laurence East, la firma se sitúa del lado del cliente, no del promotor inmobiliario, ayudando a las juntas directivas a tomar decisiones bien gobernadas sobre sus terrenos, edificios y misión.',
+      p2: 'La auditoría destila lo que Reframe ha aprendido en salas de juntas reales en un solo instrumento: las organizaciones que perduran no son las más ocupadas, son aquellas cuya ausencia haría falta. Hacemos que las organizaciones misionales sean imprescindibles, descubriendo su razón de ser oculta, para que estén construidas para hacer falta.',
+      p3: 'Avanzamos a la velocidad de la confianza.',
+      proofTitle: 'Trinity United Church, Vernon',
+      proofBody: 'Cuatro hectáreas y media de terreno eclesiástico subutilizado, avanzando ahora hacia una comunidad de ingresos mixtos de 250 unidades, 161 de ellas viviendas con apoyo, con cartas de intención ya aseguradas.',
+      quote: 'Reframe presentó opciones que parecen a la vez alcanzables y sumamente emocionantes. Tengo gran confianza en su competencia para guiarnos a través de lo que de otro modo habría sido una tarea imposiblemente abrumadora.',
+      quoteWho: 'Rev. Robin Jacobson, ministra principal, Trinity United Church',
+    },
+    options: {
+      eyebrow: 'Dos formas de hacerlo',
+      head: 'Comience solo. Profundice en conjunto.',
+      tier1Tag: 'Gratis, autoaplicada',
+      tier1Title: 'La auditoría en línea',
+      tier1Body: 'Hágalo usted mismo en cinco minutos. Su informe completo —puntuación, perfil, dimensiones más débiles e interpretación personalizada— llega por correo electrónico. El punto de partida honesto para cualquier líder que se haya preguntado en silencio si su organización haría falta.',
+      tier1Cta: 'Realizar la auditoría',
+      tier2Tag: 'Facilitada, tarifa fija',
+      tier2Title: 'En vivo con su junta directiva',
+      tier2Body: 'Noventa minutos, toda su junta directiva, todos respondiendo en la misma sala. Las respuestas individuales divergen de formas que un solo formulario nunca revela, y la conversación dentro de esas brechas es donde vive el verdadero hallazgo. Tarifa fija, acreditada por completo contra cualquier proyecto más grande que le siga.',
+      tier2Cta: 'Reservar la auditoría con la junta',
+    },
+    faq: {
+      eyebrow: 'Preguntas',
+      head: 'Preguntas frecuentes',
+      items: [
+        {
+          q: '¿Qué es el Grievability Audit?',
+          a: 'Una evaluación gratuita de cinco minutos para organizaciones sin fines de lucro, iglesias y organizaciones misionales. Evalúa su organización en cinco dimensiones de presencia y responde una pregunta honesta: si desapareciera mañana, ¿su comunidad lloraría esa pérdida?',
+        },
+        {
+          q: '¿Es realmente gratis?',
+          a: 'Sí. La auditoría autoaplicada es completamente gratuita. Responde quince afirmaciones y sus resultados completos se envían a su correo electrónico. También hay disponible una versión facilitada de pago, realizada en vivo con toda su junta directiva, para organizaciones que quieran profundizar más.',
+        },
+        {
+          q: '¿Qué significa realmente ser imprescindible?',
+          a: 'Ser imprescindible es la prueba honesta del impacto. No si su organización está ocupada, bien financiada, o incluso querida, sino si su ausencia dejaría un vacío real en su comunidad. Una organización a la que nadie lloraría ya ha comenzado silenciosamente a desaparecer.',
+        },
+        {
+          q: '¿Para quién es esto?',
+          a: 'Presidentes de junta, pastores, directores ejecutivos y líderes de organizaciones sin fines de lucro, organizaciones benéficas, iglesias y comunidades de fe, especialmente organizaciones propietarias de terrenos o edificios que sienten que deberían hacer más por su comunidad de lo que hacen actualmente.',
+        },
+        {
+          q: '¿Quién creó esto?',
+          a: 'Reframe Concepts, una consultora canadiense de impacto, sostenibilidad y gobernanza con sede en Kelowna, Columbia Británica, que trabaja con organizaciones sin fines de lucro propietarias de terrenos y comunidades de fe en todo el país.',
+        },
+      ],
+      emailQuestion: '¿Qué sucede con mi correo electrónico?',
+      emailAnswerPrefix: 'Sus resultados se envían a esa dirección, y Reframe podría hacer seguimiento con una breve serie de notas basadas en la realización de esta auditoría con juntas directivas reales. Sin correo no deseado, y puede darse de baja en cualquier momento. Consulte la ',
+      emailAnswerLinkText: 'política de privacidad',
+      emailAnswerSuffix: ' para más detalles.',
+    },
+    final: {
+      eyebrow: 'Comenzar',
+      head: 'Descubra dónde se encuentra.',
+      body: 'Quince afirmaciones. Cinco minutos. Un número que la mayoría de las organizaciones nunca piden, y los dos pasos que empiezan a cambiarlo.',
+      cta: 'Realizar la auditoría',
+      micro: 'Gratis · Resultados por correo electrónico · Creado por Reframe Concepts',
+    },
+    footer: {
+      brand: 'The Grievability Audit',
+      by: 'por',
+      privacy: 'Privacidad',
+      meta: 'Kelowna, BC · Imprescindible · Razón oculta · Construido para hacer falta',
+    },
+  },
   landing: {
     eyebrow: 'Reframe Concepts · Misión Reimaginada',
     titleBefore: '¿Su comunidad le ',
