@@ -3,9 +3,10 @@
 interface Props {
   dimIndex: number;
   totalDims: number;
+  currentDimAnswers: [number | undefined, number | undefined, number | undefined];
 }
 
-export default function ProgressRail({ dimIndex, totalDims }: Props) {
+export default function ProgressRail({ dimIndex, totalDims, currentDimAnswers }: Props) {
   return (
     <div
       style={{
@@ -59,16 +60,42 @@ export default function ProgressRail({ dimIndex, totalDims }: Props) {
 
         <div style={{ display: 'flex', gap: '6px' }}>
           {Array.from({ length: totalDims }, (_, i) => (
-            <div
-              key={i}
-              style={{
-                flex: 1,
-                height: '3px',
-                borderRadius: '999px',
-                background: i <= dimIndex ? 'var(--amber)' : 'var(--border)',
-                transition: 'background 0.3s ease',
-              }}
-            />
+            <div key={i} style={{ flex: 1 }}>
+              <div
+                style={{
+                  height: '3px',
+                  borderRadius: '999px',
+                  background: i <= dimIndex ? 'var(--amber)' : 'var(--border)',
+                  transition: 'background 0.3s ease',
+                }}
+              />
+              <div style={{ display: 'flex', gap: '4px', marginTop: '6px', height: '16px' }}>
+                {i === dimIndex &&
+                  currentDimAnswers.map((val, sIdx) => (
+                    <div
+                      key={sIdx}
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                        borderRadius: '999px',
+                        flexShrink: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: val ? '1px solid var(--gold)' : '1px solid var(--border)',
+                        background: val ? 'var(--amber)' : 'transparent',
+                        transition: 'all 0.2s ease',
+                        fontFamily: "'Roboto', sans-serif",
+                        fontSize: '9px',
+                        fontWeight: 600,
+                        color: 'var(--ink)',
+                      }}
+                    >
+                      {val ?? ''}
+                    </div>
+                  ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
