@@ -1,12 +1,14 @@
 'use client';
 
+import type { Answers } from '@/lib/scoring';
+
 interface Props {
   dimIndex: number;
   totalDims: number;
-  currentDimAnswers: [number | undefined, number | undefined, number | undefined];
+  answers: Answers;
 }
 
-export default function ProgressRail({ dimIndex, totalDims, currentDimAnswers }: Props) {
+export default function ProgressRail({ dimIndex, totalDims, answers }: Props) {
   return (
     <div
       style={{
@@ -69,9 +71,13 @@ export default function ProgressRail({ dimIndex, totalDims, currentDimAnswers }:
                   transition: 'background 0.3s ease',
                 }}
               />
-              <div style={{ display: 'flex', gap: '4px', marginTop: '6px', height: '16px' }}>
-                {i === dimIndex &&
-                  currentDimAnswers.map((val, sIdx) => (
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginTop: '6px', height: '16px' }}>
+                {/* Only a record of completed dimensions -- the one currently
+                    being answered stays empty until the user moves past it,
+                    so this never needs to update live while they're clicking. */}
+                {[0, 1, 2].map((sIdx) => {
+                  const val = i < dimIndex ? answers[`${i}-${sIdx}`] : undefined;
+                  return (
                     <div
                       key={sIdx}
                       style={{
@@ -84,7 +90,6 @@ export default function ProgressRail({ dimIndex, totalDims, currentDimAnswers }:
                         justifyContent: 'center',
                         border: val ? '1px solid var(--gold)' : '1px solid var(--border)',
                         background: val ? 'var(--amber)' : 'transparent',
-                        transition: 'all 0.2s ease',
                         fontFamily: "'Roboto', sans-serif",
                         fontSize: '9px',
                         fontWeight: 600,
@@ -93,7 +98,8 @@ export default function ProgressRail({ dimIndex, totalDims, currentDimAnswers }:
                     >
                       {val ?? ''}
                     </div>
-                  ))}
+                  );
+                })}
               </div>
             </div>
           ))}
