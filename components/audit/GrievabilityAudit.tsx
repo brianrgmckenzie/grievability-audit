@@ -87,15 +87,10 @@ function AuditContent({ testMode }: { testMode: boolean }) {
   }
 
   const isScoring = screen === 'scoring';
-  const currentDimAnswers: [number | undefined, number | undefined, number | undefined] = [
-    answers[`${dimIndex}-0`],
-    answers[`${dimIndex}-1`],
-    answers[`${dimIndex}-2`],
-  ];
 
   return (
     <div style={{ minHeight: '100vh', width: '100%', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      {isScoring && <ProgressRail dimIndex={dimIndex} totalDims={5} currentDimAnswers={currentDimAnswers} />}
+      {isScoring && <ProgressRail dimIndex={dimIndex} totalDims={5} answers={answers} />}
 
       <div style={{ width: '100%', maxWidth: '560px', flex: 1, display: 'flex', flexDirection: 'column', padding: '0 24px' }}>
         {testMode && (
